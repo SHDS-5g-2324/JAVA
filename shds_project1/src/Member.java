@@ -1,5 +1,5 @@
 public class Member {
-    private int memberno;
+    private int memberNo;
     private String name;
     private String id;
     private String password;
@@ -8,9 +8,9 @@ public class Member {
     private String email;
     private int point;
 
-
-    public Member(int memberno, String name, String id, String password, int age, String sex, String email, int point) {
-        this.memberno = memberno;
+    // 생성자
+    public Member(int memberNo, String name, String id, String password, int age, String sex, String email, int point) {
+        this.memberNo = memberNo;
         this.name = name;
         this.id = id;
         this.password = password;
@@ -19,12 +19,14 @@ public class Member {
         this.email = email;
         this.point = point;
     }
-    public int getMemberno() {
-        return memberno;
+
+    // Getter 및 Setter 메서드들
+    public int getMemberNo() {
+        return memberNo;
     }
 
-    public void setMemberno(int memberno) {
-        this.memberno = memberno;
+    public void setMemberNo(int memberNo) {
+        this.memberNo = memberNo;
     }
 
     public String getName() {
@@ -82,5 +84,4 @@ public class Member {
     public void setPoint(int point) {
         this.point = point;
     }
-
 }

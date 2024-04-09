@@ -67,15 +67,12 @@ public class CRUDExample {
 
     static void processMenu(Connection conn, Scanner scanner) throws SQLException {
         while (true) {
-            System.out.println("1. Create 2. Read 3. Update 4. Delete 5. 로그아웃");
+            System.out.println("1. 개인정보 출력 3. Update 4. Delete 5. 로그아웃");
             System.out.print("원하는 작업을 선택하세요: ");
             int choice = scanner.nextInt();
 
             switch (choice) {
                 case 1:
-                    createData(conn, scanner);
-                    break;
-                case 2:
                     readData(conn);
                     break;
                 case 3:

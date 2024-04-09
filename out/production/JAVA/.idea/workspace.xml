@@ -39,7 +39,15 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
+<<<<<<< Updated upstream:out/production/JAVA/.idea/workspace.xml
     "last_opened_file_path": "C:/coding/SHDS/JAVA",
+=======
+    "last_opened_file_path": "D:/Java/Git/JAVA/shds_project1",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+>>>>>>> Stashed changes:.idea/workspace.xml
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
@@ -58,8 +66,14 @@
       <created>1712637111950</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
+<<<<<<< Updated upstream:out/production/JAVA/.idea/workspace.xml
       <updated>1712637111950</updated>
       <workItem from="1712637113093" duration="61000" />
+=======
+      <updated>1712595837168</updated>
+      <workItem from="1712595839938" duration="159000" />
+      <workItem from="1712641530520" duration="1425000" />
+>>>>>>> Stashed changes:.idea/workspace.xml
     </task>
     <servers />
   </component>

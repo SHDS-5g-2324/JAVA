@@ -3,8 +3,8 @@ import java.sql.*;
 public class DbConnect {
     public static void main(String[] args) {
         // Oracle 데이터베이스 연결 정보
-        String jdbcURL = "jdbc:oracle:thin:@localhost:1521:xe"; // 호스트:포트/서비스이름
-        String username = "shds";
+        String jdbcURL = "jdbc:oracle:thin:@211.178.201.98:1521:xe"; // 호스트:포트/서비스이름
+        String username = "shds2";
         String password = "shds1234";
 
         // JDBC 연결 객체

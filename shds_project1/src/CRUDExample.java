@@ -1,14 +1,15 @@
 import java.sql.*;
 import java.util.Scanner;
 
+
 public class CRUDExample {
     static final String JDBC_URL = "jdbc:oracle:thin:@211.178.201.98:1521:xe";
-    static final String USER = "shds2";
+    static final String USER = "shds";
     static final String PASSWORD = "shds1234";
-    static final String INSERT_MEMBER_QUERY = "INSERT INTO member (memberno, name, id, pwd, age, sex, email, point) " +
+    static final String INSERT_MEMBER_QUERY = "INSERT INTO member (memberno, name, id, pwd, age, sex, email, money) " +
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     static boolean loggedIn = false;
-    static String loggedInUserId; // 추가: 현재 로그인한 사용자의 아이디 저장
+    static String loggedInUserId;
 
     public static void main(String[] args) {
         try (Connection conn = DriverManager.getConnection(JDBC_URL, USER, PASSWORD);
@@ -60,7 +61,7 @@ public class CRUDExample {
                 if (rs.next()) {
                     int count = rs.getInt("count");
                     if (count == 1) {
-                        loggedInUserId = id; // 로그인한 사용자의 아이디 저장
+                        loggedInUserId = id;
                         return true;
                     }
                 }
@@ -71,31 +72,20 @@ public class CRUDExample {
 
     static void processMenu(Connection conn, Scanner scanner) throws SQLException {
         while (true) {
-<<<<<<< Updated upstream
-            System.out.println("1. Create 2. Read 3. Update 4. Delete 5. 로그아웃");
-=======
             System.out.println("1. 개인정보확인 2. 개인정보수정 3. 회원탈퇴 4. 로그아웃");
->>>>>>> Stashed changes
             System.out.print("원하는 작업을 선택하세요: ");
             int choice = scanner.nextInt();
 
             switch (choice) {
                 case 1:
-<<<<<<< Updated upstream
-                    createData(conn, scanner);
-                    break;
-                case 2:
-                    readData(conn);
-=======
                     if (loggedIn) {
-                        readData(conn, loggedInUserId); // 로그인한 사용자의 아이디를 전달
+                        readData(conn, loggedInUserId);
                     } else {
                         System.out.println("로그인이 필요합니다.");
                     }
                     break;
                 case 2:
                     updateData(conn, scanner, loggedInUserId);
->>>>>>> Stashed changes
                     break;
                 case 3:
                     deleteData(conn, scanner, loggedInUserId);
@@ -118,12 +108,11 @@ public class CRUDExample {
         do {
             System.out.print("아이디: ");
             id = scanner.next();
-            // 이미 존재하는 아이디인지 확인
             idExists = checkIfIdExists(conn, id);
             if (idExists) {
                 System.out.println("이미 존재하는 아이디입니다. 다른 아이디를 입력하세요.");
             }
-        } while (idExists); // 이미 존재하는 아이디인 경우 반복해서 새로운 아이디 입력 받기
+        } while (idExists);
 
         System.out.print("비밀번호: ");
         String password = scanner.next();
@@ -133,13 +122,10 @@ public class CRUDExample {
         String sex = scanner.next();
         System.out.print("이메일: ");
         String email = scanner.next();
-        int point = 0;
+        int money = 0;
 
-        // 중복되지 않은 아이디를 사용하여 회원 추가
         try (PreparedStatement pstmt = conn.prepareStatement(INSERT_MEMBER_QUERY)) {
-            // 마지막 memberno 가져오기
             int lastMemberNo = getLastMemberNo(conn);
-            // 새로운 번호 생성
             int num = lastMemberNo + 1;
 
             pstmt.setInt(1, num);
@@ -149,7 +135,7 @@ public class CRUDExample {
             pstmt.setInt(5, age);
             pstmt.setString(6, sex);
             pstmt.setString(7, email);
-            pstmt.setInt(8, point);
+            pstmt.setInt(8, money);
 
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows > 0)
@@ -159,7 +145,6 @@ public class CRUDExample {
         }
     }
 
-    // 이미 존재하는 아이디인지 확인하는 메서드
     static boolean checkIfIdExists(Connection conn, String id) throws SQLException {
         String sql = "SELECT COUNT(*) AS count FROM member WHERE id = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -175,7 +160,6 @@ public class CRUDExample {
         return false;
     }
 
-    // 마지막 memberno 가져오는 메서드
     static int getLastMemberNo(Connection conn) throws SQLException {
         String sql = "SELECT MAX(memberno) AS lastMemberNo FROM member";
         try (Statement stmt = conn.createStatement();
@@ -194,12 +178,12 @@ public class CRUDExample {
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    System.out.println(", 이름: " + rs.getString("name") +
+                    System.out.println("이름: " + rs.getString("name") +
                             ", 아이디: " + rs.getString("id") +
                             ", 나이: " + rs.getInt("age") +
                             ", 성별: " + rs.getString("sex") +
                             ", 이메일: " + rs.getString("email") +
-                            ", 포인트: " + rs.getInt("point"));
+                            ", 보유 잔액: " + rs.getInt("money"));
                 } else {
                     System.out.println("해당하는 사용자의 정보가 없습니다.");
                 }
@@ -224,9 +208,42 @@ public class CRUDExample {
         }
     }
 
+    static void updateMoney(Connection conn, Scanner scanner, String userId) throws SQLException {
+        System.out.print("추가할 금액 입력:");
+        int plusMoney = scanner.nextInt();
+
+        // 현재 잔액을 조회하는 쿼리
+        String balanceQuery = "SELECT money FROM member WHERE id = ?";
+        int currentBalance = 0;
+
+        try (PreparedStatement balanceStmt = conn.prepareStatement(balanceQuery)) {
+            balanceStmt.setString(1, userId);
+            try (ResultSet rs = balanceStmt.executeQuery()) {
+                if (rs.next()) {
+                    currentBalance = rs.getInt("money");
+                }
+            }
+        }
+
+        // 잔액에 plusMoney를 추가하여 새로운 잔액을 계산
+        int newBalance = currentBalance + plusMoney;
+
+        // 새로운 잔액을 업데이트하는 쿼리
+        String updateQuery = "UPDATE member SET money = ? WHERE id = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(updateQuery)) {
+            pstmt.setInt(1, newBalance);
+            pstmt.setString(2, userId);
+
+            int affectedRows = pstmt.executeUpdate();
+            if (affectedRows > 0)
+                System.out.println("잔액이 성공적으로 수정되었습니다.");
+            else
+                System.out.println("잔액 수정에 실패했습니다.");
+        }
+    }
 
     static void deleteData(Connection conn, Scanner scanner, String userId) throws SQLException {
-        // 삭제할 회원 번호를 입력받는 대신, 현재 로그인한 사용자의 아이디를 사용하여 삭제
+        // 현재 로그인한 사용자의 아이디를 사용하여 삭제
         String sql = "DELETE FROM member WHERE id = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, userId);

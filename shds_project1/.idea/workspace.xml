@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ed82b6a-ff74-467d-a1f9-e0a621918eeb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/ojdbc11.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/ojdbc11.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DbConnect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DbConnect.java" afterDir="false" />
-    </list>
+    <list default="true" id="737623b1-6f16-46d0-a68b-d80f2ceb546a" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,49 +14,31 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
+  "associatedIndex": 7
 }]]></component>
-  <component name="ProjectId" id="2eqhCbx2HqpypKvGQ8vQZ9qZR2G" />
+  <component name="ProjectId" id="2eqyhXQuSoJJmPWwL4GZf2hSgom" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.DbConnect.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "haeil",
-    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/coding/SHDS/JAVA/ojdbc11-23.3.0.23.09.jar",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="jdk-17.0.10-corretto-17.0.10-f644763e9732-24fca987" />
-      </set>
-    </attachedChunks>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="1ed82b6a-ff74-467d-a1f9-e0a621918eeb" name="Changes" comment="" />
-      <created>1712637889150</created>
+      <changelist id="737623b1-6f16-46d0-a68b-d80f2ceb546a" name="Changes" comment="" />
+      <created>1712646522853</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1712637889150</updated>
-      <workItem from="1712637890236" duration="822000" />
+      <updated>1712646522853</updated>
+      <workItem from="1712646523909" duration="53000" />
     </task>
     <servers />
   </component>

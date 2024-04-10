@@ -129,7 +129,7 @@ public class Main {
                                 break;
                             case 3:
                                 Read.bookList(conn);
-                                Read.purchaseBook(conn,scanner);
+                                Read.purchaseBook(conn, scanner);
                                 /*책 구매 기능 추가 필요*/
                                 break;
                             case 4:

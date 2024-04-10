@@ -268,6 +268,7 @@ public class Read {
         String userId = Main.loggedInUserId; // 현재 로그인한 사용자의 ID 가져오기
         System.out.println("--------------------------");
         System.out.println("원하는 책의 ID를 입력하세요.");
+        scanner = new Scanner(System.in);
         String bookId = scanner.nextLine();
         String bookInfoSql = "SELECT * FROM Book WHERE BOOK_ID = ?";
         // 책 정보 조회
@@ -329,6 +330,49 @@ public class Read {
         }
     }
 
+    /* 책 구매 과정 로직에 트랜잭션 추가 필요함
+    * Connection conn = null;
+try {
+    conn = getConnection(); // getConnection() 메서드는 데이터베이스와 연결을 설정하는데 사용되는 메서드로 가정합니다.
+    conn.setAutoCommit(false); // 자동 커밋을 해제하여 트랜잭션을 수동으로 관리합니다.
+
+    // 로그인된 회원의 아이디를 통해 보유 잔액을 조회합니다.
+    int balance = getBalanceForMember(conn, memberId); // getBalanceForMember() 메서드는 멤버의 보유 잔액을 조회하는데 사용되는 메서드로 가정합니다.
+
+    // 책의 가격을 조회합니다.
+    int bookPrice = getBookPrice(conn, bookId); // getBookPrice() 메서드는 책의 가격을 조회하는데 사용되는 메서드로 가정합니다.
+
+    if (balance >= bookPrice) { // 보유 잔액이 책의 가격보다 크거나 같은 경우
+        // 보유 책 리스트에 추가하고 소지 잔액을 갱신하는 작업을 수행합니다.
+        addToBookList(conn, memberId, bookId); // addToBookList() 메서드는 보유 책 리스트에 추가하는 작업을 수행하는 메서드로 가정합니다.
+        updateBalance(conn, memberId, balance - bookPrice); // updateBalance() 메서드는 보유 잔액을 갱신하는 작업을 수행하는 메서드로 가정합니다.
+        updateBookAmount(conn, bookId); // updateBookAmount() 메서드는 책의 재고를 감소시키는 작업을 수행하는 메서드로 가정합니다.
+
+        conn.commit(); // 모든 작업이 정상적으로 수행되었으므로 커밋을 실행합니다.
+    } else {
+        System.out.println("보유 잔액이 부족합니다.");
+    }
+} catch (SQLException e) {
+    if (conn != null) {
+        try {
+            conn.rollback(); // 예외 발생 시 롤백하여 이전 상태로 되돌립니다.
+        } catch (SQLException rollbackEx) {
+            rollbackEx.printStackTrace();
+        }
+    }
+    e.printStackTrace();
+} finally {
+    if (conn != null) {
+        try {
+            conn.setAutoCommit(true); // 트랜잭션 완료 후 다시 자동 커밋 모드로 변경합니다.
+            conn.close(); // 연결을 닫습니다.
+        } catch (SQLException closeEx) {
+            closeEx.printStackTrace();
+        }
+    }
+}
+
+* */
     static void processImmediatePayment(Connection conn, String userId, String bookId, int bookPrice) throws SQLException {
         // 보유 잔액 확인
         int currentBalance = getCurrentBalance(conn, userId); // readbalance 부분이 있지만 void 형태이기에 int로 하나더만들었음
@@ -369,6 +413,7 @@ public class Read {
             try (ResultSet rs = balanceStmt.executeQuery()) {
                 if (rs.next()) {
                     currentBalance = rs.getInt("MONEY");
+                    System.out.println("### 현재 보유 잔액 : " + currentBalance + "원 입니다.");
                 } else {
                     System.out.println("잔액 조회에 실패했습니다.");
                 }

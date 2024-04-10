@@ -169,7 +169,7 @@ public class Read {
         try (PreparedStatement pstmt = conn.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
             while (rs.next()) {
-                System.out.println(", 제목: " + rs.getString("SUBJECT") +
+                System.out.println("제목: " + rs.getString("SUBJECT") +
                         ", 가격: " + rs.getInt("PRICE") +
                         ", 저자: " + rs.getString("AUTHOR") +
                         ", 출판사: " + rs.getString("PUBLISHER") +
@@ -216,6 +216,7 @@ public class Read {
                                 ", 가격: " + rs.getInt("PRICE") +
                                 ", 저자: " + rs.getString("AUTHOR") +
                                 ", 출판사: " + rs.getString("PUBLISHER") +
+                                ", 좋아요 수: " + rs.getInt("LIKE_COUNT") +
                                 ", 수량: " + rs.getInt("AMOUNT"));
 
                         // 책 구매 또는 관심책 추가 메뉴 제공
@@ -224,9 +225,17 @@ public class Read {
                         int num = scanner.nextInt();
                         switch (num) {
                             case 1:
-                                // 책 구매하기 기능 호출
+                                System.out.println();
+                                /* 책 구매하기 기능 호출구매를 하면
+                                바로 결제 하기와 나중에 결제하기 를 선택하고
+                                    결제하기를 하면 보유 잔액에서 차감하고 결제대기를 하면 넘어간다
+                                그다음  추가 된다
+
+                                */
+
                                 break;
                             case 2:
+                                Create.addFavoriteBook(conn, scanner, rs.getString("BOOK_ID"));
                                 // 관심책 추가하기 기능 호출
                                 break;
                             case 3:
@@ -234,7 +243,7 @@ public class Read {
                             default:
                                 System.out.println("잘못된 선택입니다.");
                         }
-                        if(num == 3){
+                        if (num == 3) {
                             break;
                         }
                     }
@@ -260,4 +269,3 @@ public class Read {
         } while (true);
     }
 }
-

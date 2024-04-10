@@ -115,7 +115,7 @@ public class Main {
                     break;
                 case 2:
                     while (true) {
-                        System.out.println("1.책목록 2.TOP10도서  3.책검색 4.뒤로가기");
+                        System.out.println("1.책목록 2.TOP10도서 3.책검색 4.뒤로가기");
                         System.out.print("원하는 작업을 선택하세요: ");
 
                         int choice = scanner.nextInt();

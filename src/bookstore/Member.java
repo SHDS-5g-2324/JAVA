@@ -1,3 +1,5 @@
+package bookstore;
+
 import lombok.Data;
 
 @Data
@@ -10,6 +12,9 @@ public class Member {
     private String sex;
     private String email;
     private int money;
+
+    // 생성자, getter 및 setter는 생략합니다.
+
 
 
     public Member(int memberno, String name, String id, String pwd, int age, String sex, String email, int money) {

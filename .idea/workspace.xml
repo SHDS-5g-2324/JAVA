@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6e822f2a-038e-41e8-bce8-ab7d273fb6a0" name="Changes" comment="구매 내역조회 , 잔액 충전 기능 추가">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shds_project1/src/MemberCRUD.java" beforeDir="false" afterPath="$PROJECT_DIR$/shds_project1/src/MemberCRUD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shds_project1/.idea/libraries/ojdbc11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shds_project1/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shds_project1/out/production/shds_project1/Book.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shds_project1/out/production/shds_project1/CRUDExample.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shds_project1/out/production/shds_project1/DbConnect.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shds_project1/out/production/shds_project1/Member.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shds_project1/out/production/shds_project1/MemberDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shds_project1/out/production/shds_project1/Purchase.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shds_project1/src/Book.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shds_project1/src/CRUDExample.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shds_project1/src/DbConnect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shds_project1/src/Member.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shds_project1/src/MemberDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shds_project1/src/Purchase.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2erXXjkNryAnzIGRMqAmmdWGucN" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Jinu/Desktop/study/DS_/ojdbc11-23.3.0.23.09.jar&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Jinu\Desktop\study\DS_\GitHub\shds_project1" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.MemberCRUD">
+    <configuration name="MemberCRUD" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MemberCRUD" />
+      <module name="GitHub" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Purchase" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Purchase" />
+      <module name="GitHub" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MemberCRUD" />
+        <item itemvalue="Application.Purchase" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6e822f2a-038e-41e8-bce8-ab7d273fb6a0" name="Changes" comment="" />
+      <created>1712663711918</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1712663711918</updated>
+      <workItem from="1712663713550" duration="44000" />
+      <workItem from="1712663883456" duration="2855000" />
+      <workItem from="1712670804172" duration="7622000" />
+      <workItem from="1712716294135" duration="3808000" />
+    </task>
+    <task id="LOCAL-00001" summary="구매 내역조회 , 잔액 충전 기능 추가">
+      <created>1712679498220</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1712679498220</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="구매 내역조회 , 잔액 충전 기능 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="구매 내역조회 , 잔액 충전 기능 추가" />
+  </component>
+</project>

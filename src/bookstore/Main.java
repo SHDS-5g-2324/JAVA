@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.Scanner;
 
 public class Main {
-    static final String JDBC_URL = "jdbc:oracle:thin:@211.178.201.98:1521:xe";
+    static final String JDBC_URL = "jdbc:oracle:thin:@localhost:1521:xe";
     static final String USER = "shds2";
     static final String PASSWORD = "shds1234";
     static final String INSERT_MEMBER_QUERY = "INSERT INTO member (member_no, name, id, pwd, ages, sex, email, money) " + // 수정
@@ -115,7 +115,7 @@ public class Main {
                     break;
                 case 2:
                     while (true) {
-                        System.out.println("1.책목록 2.TOP10도서 3.책검색 4.뒤로가기");
+                        System.out.println("1.책목록 2.TOP10도서 3.책구매하기 4.책검색 5.뒤로가기");
                         System.out.print("원하는 작업을 선택하세요: ");
 
                         int choice = scanner.nextInt();
@@ -128,16 +128,21 @@ public class Main {
                                 Read.top10List(conn);
                                 break;
                             case 3:
+                                Read.bookList(conn);
+                                Read.purchaseBook(conn,scanner);
+                                /*책 구매 기능 추가 필요*/
+                                break;
+                            case 4:
                                 Read.searchBook(conn,scanner); // 검색이 되었으면 관심목록 추가 , 구매하기 , 뒤로가기 버튼을 만들고
                                 // 검색이 안되었으면 게속 검색하기 겠습니까를 추가헤서 뒤로가기랑 냅둔다
                                 break;
-                            case 4:
+                            case 5:
                                 break;
                             default:
                                 System.out.println("올바른 메뉴를 선택하세요.");
                                 break;
                         }
-                        if(choice == 4){
+                        if(choice == 5){
                             break;
                         }
                     }

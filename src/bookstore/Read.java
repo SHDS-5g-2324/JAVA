@@ -205,46 +205,40 @@ public class Read {
 
             String bookName = scanner.nextLine(); // 사용자로부터 입력 받은 책의 제목을 bookName 변수에 저장
 
-            String sql = "SELECT * FROM BOOK WHERE SUBJECT = ?";
+            String sql = "SELECT * FROM BOOK WHERE SUBJECT LIKE ?";
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setString(1, bookName);
+                pstmt.setString(1, "%" + bookName + "%");
                 try (ResultSet rs = pstmt.executeQuery()) {
                     boolean found = false; // 검색 결과를 표시하기 위한 플래그
+                    System.out.println("['" + bookName + "'이 포함된 검색 결과 ]");
                     while (rs.next()) {
                         found = true; // 검색 결과가 있음을 표시
-                        System.out.println("제목: " + rs.getString("SUBJECT") +
+                        System.out.println("[" + rs.getString("BOOK_ID") + "]" +
+                                "제목: " + rs.getString("SUBJECT") +
                                 ", 가격: " + rs.getInt("PRICE") +
                                 ", 저자: " + rs.getString("AUTHOR") +
                                 ", 출판사: " + rs.getString("PUBLISHER") +
                                 ", 좋아요 수: " + rs.getInt("LIKE_COUNT") +
                                 ", 수량: " + rs.getInt("AMOUNT"));
-
-                        // 책 구매 또는 관심책 추가 메뉴 제공
-                        System.out.println("1.책 구매하기  2.관심책 추가하기 3.이전 메뉴로 돌아가기");
-                        System.out.print("원하는 작업을 선택하세요: ");
-                        int num = scanner.nextInt();
+                    }
+                    // 책 구매 또는 관심책 추가 메뉴 제공
+                    System.out.println("1.책 구매하기 2.관심책 추가하기 3.이전 메뉴로 돌아가기");
+                    System.out.print("원하는 작업을 선택하세요: ");
+                    int num = scanner.nextInt();
+                    while (num != 3) {
                         switch (num) {
                             case 1:
-                                System.out.println();
-                                /* 책 구매하기 기능 호출구매를 하면
-                                바로 결제 하기와 나중에 결제하기 를 선택하고
-                                    결제하기를 하면 보유 잔액에서 차감하고 결제대기를 하면 넘어간다
-                                그다음  추가 된다
-
-                                */
-
+                                purchaseBook(conn, scanner);
+                                // 책 구매하기 기능 호출
                                 break;
                             case 2:
-                                Create.addFavoriteBook(conn, scanner, rs.getString("BOOK_ID"));
+                                Create.addFavoriteBook(conn, scanner);
                                 // 관심책 추가하기 기능 호출
-                                break;
-                            case 3:
                                 break;
                             default:
                                 System.out.println("잘못된 선택입니다.");
-                        }
-                        if (num == 3) {
-                            break;
+                                System.out.println("1.책 구매하기 2.관심책 추가하기 3.이전 메뉴로 돌아가기");
+                                num = scanner.nextInt();
                         }
                     }
 
@@ -268,4 +262,136 @@ public class Read {
             }
         } while (true);
     }
+
+    //구매하기 창에서 북 리스트를 보여주고, 선택하는 경우(bookId가 없을 때)
+    static void purchaseBook(Connection conn, Scanner scanner) throws SQLException {
+        String userId = Main.loggedInUserId; // 현재 로그인한 사용자의 ID 가져오기
+        System.out.println("--------------------------");
+        System.out.println("원하는 책의 ID를 입력하세요.");
+        String bookId = scanner.nextLine();
+        String bookInfoSql = "SELECT * FROM Book WHERE BOOK_ID = ?";
+        // 책 정보 조회
+        try (PreparedStatement pstmt = conn.prepareStatement(bookInfoSql)) {
+            pstmt.setString(1, bookId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    int bookPrice = rs.getInt("PRICE");
+                    System.out.println("책 제목: " + rs.getString("SUBJECT"));
+                    System.out.println("책 가격: " + bookPrice);
+
+                    // 구매 옵션 선택
+                    System.out.println("1. 바로 결제하기  2. 나중에 결제하기");
+                    System.out.print("구매 옵션을 선택하세요: ");
+                    int purchaseOption = scanner.nextInt();
+
+                    if (purchaseOption == 1) {
+                        // 바로 결제하기: 보유 잔액에서 즉시 결제
+                        processImmediatePayment(conn, userId, bookId, bookPrice);
+                    } else if (purchaseOption == 2) {
+                        // 나중에 결제하기: 결제 대기 상태로 이동
+                        processDelayedPayment(conn, userId, bookId, bookPrice);
+                    } else {
+                        System.out.println("올바른 옵션을 선택하세요.");
+                    }
+                }
+            }
+        }
+    }
+    // 책 조회 후 구매하기 버튼 클릭 시 (bookId를 가지고 오는 경우)
+    static void purchaseBook(Connection conn, Scanner scanner, String bookId) throws SQLException {
+        String userId = Main.loggedInUserId; // 현재 로그인한 사용자의 ID 가져오기
+        String bookInfoSql = "SELECT * FROM Book WHERE BOOK_ID = ?";
+        // 책 정보 조회
+        try (PreparedStatement pstmt = conn.prepareStatement(bookInfoSql)) {
+            pstmt.setString(1, bookId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    int bookPrice = rs.getInt("PRICE");
+                    System.out.println("책 제목: " + rs.getString("SUBJECT"));
+                    System.out.println("책 가격: " + bookPrice);
+
+                    // 구매 옵션 선택
+                    System.out.println("1. 바로 결제하기  2. 나중에 결제하기");
+                    System.out.print("구매 옵션을 선택하세요: ");
+                    int purchaseOption = scanner.nextInt();
+
+                    if (purchaseOption == 1) {
+                        // 바로 결제하기: 보유 잔액에서 즉시 결제
+                        processImmediatePayment(conn, userId, bookId, bookPrice);
+                    } else if (purchaseOption == 2) {
+                        // 나중에 결제하기: 결제 대기 상태로 이동
+                        processDelayedPayment(conn, userId, bookId, bookPrice);
+                    } else {
+                        System.out.println("올바른 옵션을 선택하세요.");
+                    }
+                }
+            }
+        }
+    }
+
+    static void processImmediatePayment(Connection conn, String userId, String bookId, int bookPrice) throws SQLException {
+        // 보유 잔액 확인
+        int currentBalance = getCurrentBalance(conn, userId); // readbalance 부분이 있지만 void 형태이기에 int로 하나더만들었음
+        if (currentBalance < bookPrice) {
+            System.out.println("잔액이 부족하여 결제할 수 없습니다.");
+            return;
+        }
+
+        // 결제 진행
+        String updateBalanceSql = "UPDATE Member SET MONEY = MONEY - ? WHERE ID = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(updateBalanceSql)) {
+            pstmt.setInt(1, bookPrice);
+            pstmt.setString(2, userId);
+            int affectedRows = pstmt.executeUpdate();
+            if (affectedRows > 0) {
+                // 결제 성공 시 구매 내역 추가
+                addPurchase(conn, userId, bookId, bookPrice, "결제완료");
+                System.out.println("결제가 완료되었습니다.");
+            } else {
+                System.out.println("결제에 실패했습니다.");
+            }
+        }
+    }
+
+
+    static void processDelayedPayment(Connection conn, String userId, String bookId, int bookPrice) throws SQLException {
+        // 결제 대기 상태로 이동
+        addPurchase(conn, userId, bookId, bookPrice, "상태");
+        System.out.println("결제 대기 상태로 이동되었습니다.");
+    }
+
+    static int getCurrentBalance(Connection conn, String userId) throws SQLException {
+        String balanceQuery = "SELECT MONEY FROM Member WHERE ID = ?";
+        int currentBalance = 0;
+
+        try (PreparedStatement balanceStmt = conn.prepareStatement(balanceQuery)) {
+            balanceStmt.setString(1, userId);
+            try (ResultSet rs = balanceStmt.executeQuery()) {
+                if (rs.next()) {
+                    currentBalance = rs.getInt("MONEY");
+                } else {
+                    System.out.println("잔액 조회에 실패했습니다.");
+                }
+            }
+        }
+        return currentBalance;
+    }
+
+    static void addPurchase(Connection conn, String userId, String bookId, int bookPrice, String text) throws SQLException {
+        String insertSql = "INSERT INTO Purchase (ID, BOOK_ID, PRICE, STATE) VALUES (?, ?, ?, '결제대기')";
+        try (PreparedStatement pstmt = conn.prepareStatement(insertSql)) {
+            pstmt.setString(1, userId);
+            pstmt.setString(2, bookId);
+            pstmt.setInt(3, bookPrice);
+            int affectedRows = pstmt.executeUpdate();
+            if (affectedRows > 0) {
+                System.out.println("결제 대기 상태로 추가되었습니다.");
+            } else {
+                System.out.println("구매 내역 추가에 실패했습니다.");
+            }
+        }
+    }
+
+
 }
+

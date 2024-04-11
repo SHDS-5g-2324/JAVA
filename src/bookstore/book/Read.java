@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Read {
 	/*책 전체 리스트 읽기*/
-	static void bookList(Connection conn) throws SQLException {
+	public static void bookList(Connection conn) throws SQLException {
 		String sql = "SELECT * FROM Book ";
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql); ResultSet rs = pstmt.executeQuery()) {
@@ -22,7 +22,7 @@ public class Read {
 	}
 	
 	/*판매량 기준 상위 10개 리스트 출력*/
-	static void top10List(Connection conn) throws SQLException {
+	public static void top10List(Connection conn) throws SQLException {
 		String sql = "SELECT * FROM (SELECT * FROM Book ORDER BY SELL_COUNT DESC) WHERE ROWNUM <= 10";
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql); ResultSet rs = pstmt.executeQuery()) {
@@ -35,7 +35,7 @@ public class Read {
 		}
 	}
 	/*관심있는 책 목록 출력*/
-	static void displayFavoriteBooks(Connection conn, String loggedInUserId) throws SQLException {
+	public static void displayFavoriteBooks(Connection conn, String loggedInUserId) throws SQLException {
 		String sql = "SELECT * " + "FROM Like_book L " + "LEFT JOIN MEMBER M ON M.ID = L.ID "
 				+ "JOIN book B ON B.book_id = L.book_id " + "WHERE L.id = ?";
 
@@ -61,7 +61,7 @@ public class Read {
 	}
 	
 	/*구매한 책 목록 출력*/
-	static void executeQuery(Connection conn, String memberId) throws SQLException { // 구매내역 조회
+	public static void executeQuery(Connection conn, String memberId) throws SQLException { // 구매내역 조회
 		String sql = "SELECT * " + "FROM MEMBER M " + "LEFT JOIN PURCHASE P ON M.ID = P.ID "
 				+ "LEFT JOIN BOOK B ON B.BOOK_ID = P.BOOK_ID " + "WHERE M.ID = ?";
 

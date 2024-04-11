@@ -1,6 +1,20 @@
 package src.bookstore;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Scanner;
+
+import src.bookstore.book.Read;
+import src.bookstore.book.Search;
+import src.bookstore.member.DeleteId;
+import src.bookstore.member.GetBalance;
+import src.bookstore.member.IdCheck;
+import src.bookstore.member.MoneyChange;
+import src.bookstore.member.PwdChange;
+import src.bookstore.member.RegisterMember;
+import src.bookstore.purchase.Purchase;
 
 public class Main {
     static final String JDBC_URL = "jdbc:oracle:thin:@211.178.201.98:1521:xe";
@@ -9,7 +23,7 @@ public class Main {
     static final String INSERT_MEMBER_QUERY = "INSERT INTO member (member_no, name, id, pwd, ages, sex, email, money) " + // 수정
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     static boolean loggedIn = false;
-    static String loggedInUserId;
+    public static String loggedInUserId;
     static String bookName;
 
 
@@ -33,7 +47,7 @@ public class Main {
                         }
                         break;
                     case 2:
-                        Create.createData(conn, scanner);
+                        RegisterMember.createData(conn, scanner);
                         break;
                     case 3:
                         System.out.println("프로그램을 종료합니다.");
@@ -86,16 +100,16 @@ public class Main {
                         int choice = scanner.nextInt();
                         switch (choice) {
                             case 1:
-                                Read.readData(conn, loggedInUserId);
+                                IdCheck.readData(conn, loggedInUserId);
                                 break;
                             case 2:
-                                Update.updateData(conn, scanner, loggedInUserId);
+                                PwdChange.updateData(conn, scanner, loggedInUserId);
                                 break;
                             case 3:
-                                Read.readBalance(conn, loggedInUserId);
+                                GetBalance.readBalance(conn, loggedInUserId);
                                 break;
                             case 4:
-                                Update.updateMoney(conn, scanner, loggedInUserId);
+                                MoneyChange.updateMoney(conn, scanner, loggedInUserId);
                                 break;
                             case 5:
                                 Read.executeQuery(conn, loggedInUserId);
@@ -128,10 +142,10 @@ public class Main {
                                 break;
                             case 3:
                                 Read.bookList(conn);
-                                Read.purchaseBook(conn, scanner);
+                                Purchase.purchaseBook(conn, scanner);
                                 break;
                             case 4:
-                                Read.searchBook(conn,scanner); // 검색이 되었으면 관심목록 추가 , 구매하기 , 뒤로가기 버튼을 만들고
+                                Search.searchBook(conn,scanner); // 검색이 되었으면 관심목록 추가 , 구매하기 , 뒤로가기 버튼을 만들고
                                 // 검색이 안되었으면 게속 검색하기 겠습니까를 추가헤서 뒤로가기랑 냅둔다
                                 break;
                             case 5:
@@ -147,7 +161,7 @@ public class Main {
                     break;
 
                 case 3:
-                    Delete.deleteData(conn, scanner, loggedInUserId);
+                    DeleteId.deleteData(conn, scanner, loggedInUserId);
                     break;
                 case 4:
                     loggedIn = false;

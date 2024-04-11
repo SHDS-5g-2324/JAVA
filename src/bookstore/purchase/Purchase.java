@@ -6,10 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import src.bookstore.Main;
+
 public class Purchase {
 
 	// 구매하기 창에서 북 리스트를 보여주고, 선택하는 경우(bookId가 없을 때)
-	static void purchaseBook(Connection conn, Scanner scanner) throws SQLException {
+	public static void purchaseBook(Connection conn, Scanner scanner) throws SQLException {
 		String userId = Main.loggedInUserId; // 현재 로그인한 사용자의 ID 가져오기
 		System.out.println("--------------------------");
 		System.out.println("(돌아가려면 0을 입력하세요.)원하는 책의 ID를 입력하세요.");
@@ -49,7 +51,7 @@ public class Purchase {
 	}
 
 	// 책 조회 후 구매하기 버튼 클릭 시 (bookId를 가지고 오는 경우)
-	static void purchaseBook(Connection conn, Scanner scanner, String bookId) throws SQLException {
+	public static void purchaseBook(Connection conn, Scanner scanner, String bookId) throws SQLException {
 		String userId = Main.loggedInUserId; // 현재 로그인한 사용자의 ID 가져오기
 		String bookInfoSql = "SELECT * FROM Book WHERE BOOK_ID = ?";
 		System.out.println("--------------------------");

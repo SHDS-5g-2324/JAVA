@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class GetBalance {
 
-	static void readBalance(Connection conn, String userId) throws SQLException {
+	public static void readBalance(Connection conn, String userId) throws SQLException {
 		String balanceQuery = "SELECT money FROM member WHERE id = ?";
 		int currentBalance = 0;
 

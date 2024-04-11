@@ -130,7 +130,6 @@ public class Main {
                             case 3:
                                 Read.bookList(conn);
                                 Read.purchaseBook(conn, scanner);
-                                /*책 구매 기능 추가 필요*/
                                 break;
                             case 4:
                                 Read.searchBook(conn,scanner); // 검색이 되었으면 관심목록 추가 , 구매하기 , 뒤로가기 버튼을 만들고

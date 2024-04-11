@@ -90,10 +90,9 @@ public class Create {
 		}
 		return 0;
 	}
-
+/* 전달받은 bookid 가 있는 경우 */
 	static void addFavoriteBook(Connection conn, Scanner scanner, String bookId) throws SQLException {
 		String userId = Main.loggedInUserId; // 현재 로그인한 사용자의 ID 가져오기
-		System.out.println("bookid 가져온 경우 addFavoriteBook()");
 		// 이미 관심 책 목록에 있는지 확인
 		String checkSql = "SELECT COUNT(*) AS count FROM Like_book WHERE id = ? AND book_id = ?";
 		try (PreparedStatement pstmt = conn.prepareStatement(checkSql)) {
@@ -130,45 +129,70 @@ public class Create {
 		}
 	}
 
+	/*book id 없이 가져온 경우*/
 	static void addFavoriteBook(Connection conn, Scanner scanner) throws SQLException {
 		String userId = Main.loggedInUserId; // 현재 로그인한 사용자의 ID 가져오기
-		System.out.println("원하는 책의 ID를 입력해주세요.");
+		System.out.println("관심 등록할 책의 ID를 입력해주세요.");
 		scanner = new Scanner(System.in);
 		String bookId = scanner.nextLine();
 		// 이미 관심 책 목록에 있는지 확인
 		String checkSql = "SELECT COUNT(*) AS count FROM like_book WHERE id = ? AND book_id = ?";
-		try (PreparedStatement pstmt = conn.prepareStatement(checkSql)) {
-			pstmt.setString(1, userId);
-			pstmt.setString(2, bookId);
-			try (ResultSet rs = pstmt.executeQuery()) {
-				if (rs.next()) {
-					int count = rs.getInt("count");
-					if (count > 0) {
-						System.out.println("이미 관심 책으로 추가되어 있습니다.");
-						return;
-					}
+		PreparedStatement pstmtCheck = null;
+		ResultSet rs = null;
+		try {
+			pstmtCheck = conn.prepareStatement(checkSql);
+			pstmtCheck.setString(1, userId);
+			pstmtCheck.setString(2, bookId);
+			rs = pstmtCheck.executeQuery();
+			if (rs.next()) {
+				int count = rs.getInt("count");
+				if (count > 0) {
+					System.out.println("이미 관심 책으로 추가되어 있습니다.");
+					return; // 이미 추가된 경우 메소드 종료
 				}
+			}
+		} finally {
+			if (rs != null) {
+				rs.close();
+			}
+			if (pstmtCheck != null) {
+				pstmtCheck.close();
 			}
 		}
 
 		// 관심 책 추가
 		String insertSql = "INSERT INTO Like_book (id, book_id) VALUES (?, ?)";
-		try (PreparedStatement pstmt = conn.prepareStatement(insertSql)) {
-			pstmt.setString(1, userId);
-			pstmt.setString(2, bookId);
-			int affectedRows = pstmt.executeUpdate();
+		PreparedStatement pstmtInsert = null;
+		try {
+			pstmtInsert = conn.prepareStatement(insertSql);
+			pstmtInsert.setString(1, userId);
+			pstmtInsert.setString(2, bookId);
+			int affectedRows = pstmtInsert.executeUpdate();
 			if (affectedRows > 0) {
 				System.out.println("관심 책으로 추가되었습니다.");
 				// 관심 책 추가에 성공한 경우 해당 책의 LIKE_COUNT를 1 증가시키는 쿼리 실행
 				String updateLikeCountSql = "UPDATE Book SET LIKE_COUNT = LIKE_COUNT + 1 WHERE BOOK_ID = ?";
-				try (PreparedStatement updateStmt = conn.prepareStatement(updateLikeCountSql)) {
-					updateStmt.setString(1, bookId);
-					updateStmt.executeUpdate();
-					return;
+				PreparedStatement pstmtUpdate = null;
+				try {
+					pstmtUpdate = conn.prepareStatement(updateLikeCountSql);
+					pstmtUpdate.setString(1, bookId);
+					pstmtUpdate.executeUpdate();
+				} finally {
+					if (pstmtUpdate != null) {
+						pstmtUpdate.close();
+					}
 				}
+				return;
+
 			} else {
 				System.out.println("관심 책 추가에 실패했습니다.");
+				return;
+			}
+		} finally {
+			if (pstmtInsert != null) {
+				pstmtInsert.close();
 			}
 		}
 	}
+
 }

@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.Scanner;
 
 public class Main {
-    static final String JDBC_URL = "jdbc:oracle:thin:@localhost:1521:xe";
+    static final String JDBC_URL = "jdbc:oracle:thin:@211.178.201.98:1521:xe";
     static final String USER = "shds2";
     static final String PASSWORD = "shds1234";
     static final String INSERT_MEMBER_QUERY = "INSERT INTO member (member_no, name, id, pwd, ages, sex, email, money) " + // 수정

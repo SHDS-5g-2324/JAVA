@@ -10,10 +10,11 @@ public class Read {
 	/*책 전체 리스트 읽기*/
 	public static void bookList(Connection conn) throws SQLException {
 		String sql = "SELECT * FROM Book ";
-
+		String bookId = "";
 		try (PreparedStatement pstmt = conn.prepareStatement(sql); ResultSet rs = pstmt.executeQuery()) {
 			while (rs.next()) {
-				System.out.println("제목: " + rs.getString("SUBJECT") + ", 가격: " + rs.getInt("PRICE") + ", 저자: "
+				bookId = rs.getString("book_id");
+				System.out.println("[" + bookId + "] " + "제목: " + rs.getString("SUBJECT") + ", 가격: " + rs.getInt("PRICE") + ", 저자: "
 						+ rs.getString("AUTHOR") + ", 출판사: " + rs.getString("PUBLISHER") + ", 좋아요 수: "
 						+ rs.getInt("LIKE_COUNT") + ", 판매 수: " + rs.getInt("SELL_COUNT") + ", 수량: "
 						+ rs.getInt("AMOUNT"));

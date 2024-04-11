@@ -93,3 +93,49 @@
 
 ### `void addPurchase(Connection conn, String userId, String bookId, String state)`
     - 사용자의 결제 내역을 데이터베이스에 추가하는 메서드입니다.
+
+
+## Create.java
+### `void bookList(Connection conn)`
+- 이 메서드는 서점의 모든 책 목록을 검색하여 출력합니다.
+
+### `void top10List(Connection conn)`
+- 이 메서드는 판매량이 높은 상위 10권의 책 목록을 검색하여 출력합니다.
+
+### `void searchBook(Connection conn, Scanner scanner)`
+- 이 메서드는 사용자가 책 제목을 입력하여 책을 검색하고, 검색 결과를 출력하며, 구매 또는 관심 책으로 추가할 수 있도록 합니다.
+
+### `void purchaseBook(Connection conn, Scanner scanner)`
+- 이 메서드는 사용자가 책의 ID를 입력하여 구매할 수 있도록 합니다.
+
+### `void purchaseBook(Connection conn, Scanner scanner, String bookId)`
+- 이 메서드는 특정 책의 ID를 받아 해당 책을 구매하는 데 사용됩니다.
+
+### `void processImmediatePayment(Connection conn, String userId, String bookId, int bookPrice)`
+- 이 메서드는 사용자가 선택한 책을 즉시 결제할 수 있도록 합니다.
+
+## Main.java
+### `void main(String[] args)`
+- 이 메서드는 사용자가 프로그램을 실행할 때 호출되며, 로그인, 회원가입, 종료 등의 메뉴를 제공합니다.
+
+### `static boolean login(Connection conn, Scanner scanner)`
+- 이 메서드는 사용자의 아이디와 비밀번호를 입력받아 로그인하는 기능을 담당합니다.
+
+### `static void processMenu(Connection conn, Scanner scanner)`
+- 이 메서드는 로그인 후 메뉴를 선택하여 마이페이지, 책 목록 등의 기능을 수행합니다.
+
+## Update.java
+### `public static void updateData(Connection conn, Scanner scanner, String userId) throws SQLException`
+- 이 메서드는 사용자의 비밀번호를 업데이트합니다.
+  - `Connection conn`: 데이터베이스 연결을 위한 Connection 객체
+  - `Scanner scanner`: 사용자 입력을 위한 Scanner 객체
+  - `String userId`: 사용자의 ID
+  - 예외 처리: SQLException 발생 가능
+
+### `public static void updateMoney(Connection conn, Scanner scanner, String userId) throws SQLException`
+- 이 메서드는 사용자의 잔액을 업데이트합니다.
+  - `Connection conn`: 데이터베이스 연결을 위한 Connection 객체
+  - `Scanner scanner`: 사용자 입력을 위한 Scanner 객체
+  - `String userId`: 사용자의 ID
+  - 예외 처리: SQLException 발생 가능
+

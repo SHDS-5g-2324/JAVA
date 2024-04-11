@@ -1,4 +1,7 @@
 # 신한DS 금융SW 아카데미 :: 인터넷 서점 JAVA - ORACLE 구현
+
+![_9a1c0224-81e6-44a3-8f3c-2addb0d7d34b](https://github.com/SHDS-5g-2324/JAVA/assets/29741156/1ad8ddd7-82c7-471f-bb77-dd4ae0bb681e)
+
 ## 1. 개발 환경
 ### 프로그래밍 언어 : Java 17
 ### 사용 라이브러리 : Lombok, Ojdbc

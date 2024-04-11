@@ -34,10 +34,10 @@ public class Main {
 			while (true) {
 				System.out.println("1.로그인 2.회원가입 3.종료");
 				System.out.print("메뉴를 선택하세요: ");
-				int menu = scanner.nextInt();
+				String menu = scanner.nextLine();
 
 				switch (menu) {
-				case 1:
+				case "1":
 					if (login(conn, scanner)) {
 						System.out.println("로그인 성공!");
 						loggedIn = true;
@@ -46,10 +46,10 @@ public class Main {
 						System.out.println("아이디 또는 비밀번호가 일치하지 않습니다.");
 					}
 					break;
-				case 2:
+				case "2":
 					RegisterMember.createData(conn, scanner);
 					break;
-				case 3:
+				case "3":
 					System.out.println("프로그램을 종료합니다.");
 					return;
 				default:
@@ -89,80 +89,80 @@ public class Main {
 		while (true) {
 			System.out.println("1.마이페이지 2.책목록 3.회원탈퇴 4.로그아웃");
 			System.out.print("원하는 작업을 선택하세요: ");
-			int select = scanner.nextInt();
+			String select = scanner.nextLine();
 
 			switch (select) {
-			case 1:
+			case "1":
 				while (true) {
 					System.out.println("1.개인정보확인 2.비밀번호변경 3.잔액조회 4.잔액충전 5.구매내역조회 6.관심목록조회 7.뒤로가기");
 					System.out.print("원하는 작업을 선택하세요: ");
 
-					int choice = scanner.nextInt();
+					String choice = scanner.nextLine();
 					switch (choice) {
-					case 1:
+					case "1":
 						IdCheck.readData(conn, loggedInUserId);
 						break;
-					case 2:
+					case "2":
 						PwdChange.updateData(conn, scanner, loggedInUserId);
 						break;
-					case 3:
+					case "3":
 						GetBalance.readBalance(conn, loggedInUserId);
 						break;
-					case 4:
+					case "4":
 						MoneyChange.updateMoney(conn, scanner, loggedInUserId);
 						break;
-					case 5:
+					case "5":
 						Read.executeQuery(conn, loggedInUserId);
 						break;
-					case 6:
+					case "6":
 						Read.displayFavoriteBooks(conn, loggedInUserId);
 						break;
-					case 7:
+					case "7":
 						break;
 					default:
 						System.out.println("올바른 메뉴를 선택하세요.");
 					}
-					if (choice == 7)
+					if ("7".equals(choice))
 						break;
 				}
 				break;
-			case 2:
+			case "2":
 				while (true) {
 					System.out.println("1.책목록 2.TOP10도서 3.책구매하기 4.책검색 5.뒤로가기");
 					System.out.print("원하는 작업을 선택하세요: ");
 
-					int choice = scanner.nextInt();
+					String choice = scanner.nextLine();
 
 					switch (choice) {
-					case 1:
+					case "1":
 						Read.bookList(conn);
 						break;
-					case 2:
+					case "2":
 						Read.top10List(conn);
 						break;
-					case 3:
+					case "3":
 						Read.bookList(conn);
 						Purchase.purchaseBook(conn, scanner);
 						break;
-					case 4:
+					case "4":
 						Search.searchBook(conn, scanner); // 검색이 되었으면 관심목록 추가 , 구매하기 , 뒤로가기 버튼을 만들고
 						// 검색이 안되었으면 게속 검색하기 겠습니까를 추가헤서 뒤로가기랑 냅둔다
 						break;
-					case 5:
+					case "5":
 						break;
 					default:
 						System.out.println("올바른 메뉴를 선택하세요.");
 						break;
 					}
-					if (choice == 5) {
+					if ("5".equals(choice)) {
 						break;
 					}
 				}
 				break;
 
-			case 3:
+			case "3":
 				DeleteId.deleteData(conn, scanner, loggedInUserId);
-			case 4:
+			case "4":
 				loggedIn = false;
 				System.out.println("로그아웃 되었습니다.");
 				return;

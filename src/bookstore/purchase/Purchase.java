@@ -124,6 +124,8 @@ public class Purchase {
 		if (currentBalance < bookPrice) {
 			System.out.println("잔액이 부족하여 결제할 수 없습니다.");
 			return;
+		} else {
+			System.out.println("결제 후 잔액 : " + (currentBalance - bookPrice) + "원 입니다." );
 		}
 
 		// 결제 진행

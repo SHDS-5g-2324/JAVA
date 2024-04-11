@@ -71,6 +71,7 @@ public class Main {
 					System.out.println("1.개인정보확인 2.비밀번호변경 3.잔액조회 4.잔액충전 5.구매내역조회 6.관심목록조회 7.뒤로가기");
 					System.out.print("원하는 작업을 선택하세요: ");
 
+<<<<<<< HEAD
 					String choice = scanner.nextLine();
 					switch (choice) {
 					case "1":
@@ -95,6 +96,8 @@ public class Main {
 						break;
 					default:
 						System.out.println("올바른 메뉴를 선택하세요.");
+=======
+>>>>>>> d673baf704875f0126bbbb4c3d7b6eb2fd9ec336
 					}
 					if ("7".equals(choice))
 						break;
@@ -115,8 +118,13 @@ public class Main {
 						Read.top10List(db);
 						break;
 					case "3":
+<<<<<<< HEAD
 						Read.bookList(db);
 						Purchase.purchaseBook(db);
+=======
+						Read.bookList(conn);
+						Purchase.purchaseBook1(conn, scanner);
+>>>>>>> d673baf704875f0126bbbb4c3d7b6eb2fd9ec336
 						break;
 					case "4":
 						Search.searchBook(db); // 검색이 되었으면 관심목록 추가 , 구매하기 , 뒤로가기 버튼을 만들고

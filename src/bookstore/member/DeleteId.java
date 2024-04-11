@@ -1,13 +1,10 @@
-package bookstore;
-
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class Delete {
-    public static void deleteData(Connection conn, Scanner scanner, String userId) throws SQLException {
+public class DeleteId {
+	public static void deleteData(Connection conn, Scanner scanner, String userId) throws SQLException {
         // 현재 로그인한 사용자의 아이디를 사용하여 삭제
         String sql = "DELETE FROM member WHERE id = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {

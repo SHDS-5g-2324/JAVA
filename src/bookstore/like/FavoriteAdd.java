@@ -1,4 +1,4 @@
-package src.bookstore.like;
+package bookstore.like;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,12 +6,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import bookstore.Main;
+import bookstore.util.DbConnect;
+
 public class FavoriteAdd {
 	/* 전달받은 bookid 가 있는 경우 */
-	static void addFavoriteBook(Connection conn, Scanner scanner, String bookId) throws SQLException {
+	public static void addFavoriteBook(DbConnect db, String bookId) throws SQLException {
 		String userId = Main.loggedInUserId; // 현재 로그인한 사용자의 ID 가져오기
+		Connection conn = db.getConnection();
 		// 이미 관심 책 목록에 있는지 확인
 		String checkSql = "SELECT COUNT(*) AS count FROM Like_book WHERE id = ? AND book_id = ?";
+		
 		try (PreparedStatement pstmt = conn.prepareStatement(checkSql)) {
 			pstmt.setString(1, userId);
 			pstmt.setString(2, bookId);
@@ -47,13 +52,31 @@ public class FavoriteAdd {
 	}
 
 	/*book id 없이 가져온 경우*/
-	static void addFavoriteBook(Connection conn, Scanner scanner) throws SQLException {
+	public static void addFavoriteBook(DbConnect db) throws SQLException {
 		String userId = Main.loggedInUserId; // 현재 로그인한 사용자의 ID 가져오기
 		System.out.println("관심 등록할 책의 ID를 입력해주세요.");
-		scanner = new Scanner(System.in);
+		Scanner scanner = new Scanner(System.in);
+		Connection conn = db.getConnection();
 		String bookId = scanner.nextLine();
+		// book 테이블에 존재하는 book_id인지 확인
+		String checkSql = "SELECT COUNT(*) AS count FROM book WHERE book_id = ?";
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(checkSql)) {
+			pstmt.setString(1, bookId);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					int count = rs.getInt("count");
+					if (count == 0) {
+						System.out.println("존재하지 않는 BOOK_ID입니다.");
+						return;
+					}
+				}
+			}
+		}
+
+		
 		// 이미 관심 책 목록에 있는지 확인
-		String checkSql = "SELECT COUNT(*) AS count FROM like_book WHERE id = ? AND book_id = ?";
+		checkSql = "SELECT COUNT(*) AS count FROM like_book WHERE id = ? AND book_id = ?";
 		PreparedStatement pstmtCheck = null;
 		ResultSet rs = null;
 		try {

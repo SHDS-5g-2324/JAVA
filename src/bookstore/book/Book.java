@@ -1,3 +1,5 @@
+package bookstore.book;
+
 import lombok.Data;
 
 @Data

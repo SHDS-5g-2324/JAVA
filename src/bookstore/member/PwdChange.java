@@ -1,17 +1,19 @@
 package bookstore.member;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import bookstore.util.DbConnect;
+
 public class PwdChange {
-	public static void updateData(Connection conn, Scanner scanner, String userId) throws SQLException {
+	public static void updateData(DbConnect db, String userId) throws SQLException {
         System.out.print("새로운 비밀번호 입력:");
+        Scanner scanner = new Scanner(System.in);
         String newPassword = scanner.next();
 
         String sql = "UPDATE member SET pwd = ? WHERE id = ?";
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement pstmt = db.getConnection().prepareStatement(sql)) {
             pstmt.setString(1, newPassword);
             pstmt.setString(2, userId);
 

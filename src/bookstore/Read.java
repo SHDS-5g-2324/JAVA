@@ -181,79 +181,87 @@ public class Read {
 	}
 
 	static void searchBook(Connection conn, Scanner scanner) throws SQLException {
-		do {
-			System.out.print("검색할 책의 제목을 입력하세요: ");
-			scanner = new Scanner(System.in); // 입력 버퍼 비우기
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    do {
+	        System.out.print("검색할 책의 제목을 입력하세요: ");
+	        scanner.nextLine(); // 입력 버퍼 비우기
+	        String bookName = scanner.nextLine(); // 사용자로부터 입력 받은 책의 제목을 bookName 변수에 저장
 
-			String bookName = scanner.nextLine(); // 사용자로부터 입력 받은 책의 제목을 bookName 변수에 저장
+	        String sql = "SELECT * FROM BOOK WHERE SUBJECT LIKE ?";
+	        try {
+	            pstmt = conn.prepareStatement(sql);
+	            pstmt.setString(1, "%" + bookName + "%");
+	            rs = pstmt.executeQuery();
 
-			String sql = "SELECT * FROM BOOK WHERE SUBJECT LIKE ?";
-			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-				pstmt.setString(1, "%" + bookName + "%");
-				try (ResultSet rs = pstmt.executeQuery()) {
-					boolean found = false; // 검색 결과를 표시하기 위한 플래그
-					System.out.println("['" + bookName + "'이 포함된 검색 결과 ]");
-					int cnt = 0;
-					while (rs.next()) {
-						found = true; // 검색 결과가 있음을 표시
-						System.out.println("[" + rs.getString("BOOK_ID") + "]" + "제목: " + rs.getString("SUBJECT")
-								+ ", 가격: " + rs.getInt("PRICE") + ", 저자: " + rs.getString("AUTHOR") + ", 출판사: "
-								+ rs.getString("PUBLISHER") + ", 좋아요 수: " + rs.getInt("LIKE_COUNT") + ", 수량: "
-								+ rs.getInt("AMOUNT"));
-						cnt++;
-					}
-					// 책 구매 또는 관심책 추가 메뉴 제공
-					System.out.println("1.책 구매하기 2.관심책 추가하기 3.이전 메뉴로 돌아가기");
-					System.out.print("원하는 작업을 선택하세요: ");
-					int num = scanner.nextInt();
-					while (num != 3) {
-						switch (num) {
-						case 1:
-							if (cnt == 1) {
-								String bookId = rs.getString("BOOK_ID");
-								purchaseBook(conn, scanner, bookId);
-							} else {
-								purchaseBook(conn, scanner);
-								// 책 구매하기 기능 호출
-							}
-							return;
-						case 2:
-							if (cnt == 1) {
-								String bookId = rs.getString("BOOK_ID");
-								Create.addFavoriteBook(conn, scanner, bookId);
-							}
-							else {
-								Create.addFavoriteBook(conn, scanner);								
-							}
-							// 관심책 추가하기 기능 호출
-							return;
-						default:
-							System.out.println("잘못된 선택입니다.");
-							System.out.println("1.책 구매하기 2.관심책 추가하기 3.이전 메뉴로 돌아가기");
-							num = scanner.nextInt();
-						}
-					}
+	            boolean found = false; // 검색 결과를 표시하기 위한 플래그
+	            System.out.println("['" + bookName + "'이 포함된 검색 결과 ]");
+	            int cnt = 0;
+	            String bookId = "";
+	            while (rs.next()) {
+	                bookId = rs.getString("BOOK_ID");
+	                found = true; // 검색 결과가 있음을 표시
+	                System.out.println("[" + bookId + "]" + "제목: " + rs.getString("SUBJECT")
+	                        + ", 가격: " + rs.getInt("PRICE") + ", 저자: " + rs.getString("AUTHOR") + ", 출판사: "
+	                        + rs.getString("PUBLISHER") + ", 좋아요 수: " + rs.getInt("LIKE_COUNT") + ", 수량: "
+	                        + rs.getInt("AMOUNT"));
+	                cnt++;
+	            }
+	            // 책 구매 또는 관심책 추가 메뉴 제공
+	            System.out.println("1.책 구매하기 2.관심책 추가하기 3.이전 메뉴로 돌아가기");
+	            System.out.print("원하는 작업을 선택하세요: ");
+	            int num = scanner.nextInt();
+	            while (num != 3) {
+	                switch (num) {
+	                    case 1:
+	                        if (cnt == 1) {
+	                            purchaseBook(conn, scanner, bookId);
+	                        } else {
+	                            purchaseBook(conn, scanner);
+	                        }
+	                        return;
+	                    case 2:
+	                        if (cnt == 1) {
+	                            Create.addFavoriteBook(conn, scanner, bookId);
+	                        } else {
+	                            Create.addFavoriteBook(conn, scanner);
+	                        }
+	                        return;
+	                    default:
+	                        System.out.println("잘못된 선택입니다.");
+	                        System.out.println("1.책 구매하기 2.관심책 추가하기 3.이전 메뉴로 돌아가기");
+	                        num = scanner.nextInt();
+	                }
+	            }
 
-					if (!found) {
-						System.out.println("해당하는 책이 없습니다.");
-					}
-				}
-			}
-			// 사용자가 다시 검색을 할지 물어봄
-			String again;
-			do {
-				System.out.print("책을 검색하시겠습니까? (1.예  2.아니요): ");
-				again = scanner.next();
-				if (!again.equals("1") && !again.equals("2")) {
-					System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
-				}
-			} while (!again.equals("1") && !again.equals("2"));
+	            if (!found) {
+	                System.out.println("해당하는 책이 없습니다.");
+	            }
+	        } finally {
+	            if (rs != null) {
+	                rs.close();
+	            }
+	            if (pstmt != null) {
+	                pstmt.close();
+	            }
+	        }
 
-			if (again.equals("2")) { // 아니라고 입력하면 메서드 종료
-				return;
-			}
-		} while (true);
+	        // 사용자가 다시 검색을 할지 물어봄
+	        String again;
+	        do {
+	            System.out.print("책을 검색하시겠습니까? (1.예  2.아니요): ");
+	            again = scanner.next();
+	            if (!again.equals("1") && !again.equals("2")) {
+	                System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+	            }
+	        } while (!again.equals("1") && !again.equals("2"));
+
+	        if (again.equals("2")) { // 아니라고 입력하면 메서드 종료
+	            return;
+	        }
+	    } while (true);
 	}
+
 
 	// 구매하기 창에서 북 리스트를 보여주고, 선택하는 경우(bookId가 없을 때)
 	static void purchaseBook(Connection conn, Scanner scanner) throws SQLException {
@@ -302,31 +310,36 @@ public class Read {
 		System.out.println("--------------------------");
 		// 책 정보 조회
 		try (PreparedStatement pstmt = conn.prepareStatement(bookInfoSql)) {
-			pstmt.setString(1, bookId);
-			try (ResultSet rs = pstmt.executeQuery()) {
-				if (rs.next()) {
-					int bookPrice = rs.getInt("PRICE");
-					System.out.println("책 제목: " + rs.getString("SUBJECT"));
-					System.out.println("책 가격: " + bookPrice);
+		    pstmt.setString(1, bookId);
+		    try (ResultSet rs = pstmt.executeQuery()) {
+		        // 결과가 없는 경우 처리
+		        if (!rs.next()) {
+		            System.out.println("검색된 책이 없습니다.");
+		            return; // 메소드 종료
+		        }
 
-					// 구매 옵션 선택
-					System.out.println("1. 바로 결제하기  2. 나중에 결제하기");
-					System.out.print("구매 옵션을 선택하세요: ");
-					int purchaseOption = scanner.nextInt();
+		        // 결과가 있는 경우 처리
+		        int bookPrice = rs.getInt("PRICE");
+		        System.out.println("책 제목: " + rs.getString("SUBJECT"));
+		        System.out.println("책 가격: " + bookPrice);
 
-					if (purchaseOption == 1) {
-						// 바로 결제하기: 보유 잔액에서 즉시 결제
-						processImmediatePayment(conn, userId, bookId, bookPrice);
-						return;
-					} else if (purchaseOption == 2) {
-						// 나중에 결제하기: 결제 대기 상태로 이동
-						processDelayedPayment(conn, userId, bookId, bookPrice);
-						return;
-					} else {
-						System.out.println("올바른 옵션을 선택하세요.");
-					}
-				}
-			}
+		        // 구매 옵션 선택
+		        System.out.println("1. 바로 결제하기  2. 나중에 결제하기");
+		        System.out.print("구매 옵션을 선택하세요: ");
+		        int purchaseOption = scanner.nextInt();
+
+		        if (purchaseOption == 1) {
+		            // 바로 결제하기: 보유 잔액에서 즉시 결제
+		            processImmediatePayment(conn, userId, bookId, bookPrice);
+		            return;
+		        } else if (purchaseOption == 2) {
+		            // 나중에 결제하기: 결제 대기 상태로 이동
+		            processDelayedPayment(conn, userId, bookId, bookPrice);
+		            return;
+		        } else {
+		            System.out.println("올바른 옵션을 선택하세요.");
+		        }
+		    }
 		}
 	}
 

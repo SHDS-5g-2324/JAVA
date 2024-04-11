@@ -20,7 +20,7 @@ public class Search {
 			System.out.print("검색할 책의 제목을 입력하세요: ");
 			Scanner scanner = new Scanner(System.in);
 			String bookName = scanner.nextLine(); // 사용자로부터 입력 받은 책의 제목을 bookName 변수에 저장
-
+			String bookId = "";
 			String sql = "SELECT * FROM BOOK WHERE SUBJECT LIKE ?";
 			try {
 				pstmt = conn.prepareStatement(sql);
@@ -32,7 +32,7 @@ public class Search {
 
 				while (rs.next()) {
 					found = true; // 검색 결과가 있음을 표시
-					String bookId = rs.getString("BOOK_ID");
+					bookId = rs.getString("BOOK_ID");
 					System.out.println("[" + bookId + "]" + "제목: " + rs.getString("SUBJECT")
 							+ ", 가격: " + rs.getInt("PRICE") + ", 저자: " + rs.getString("AUTHOR") + ", 출판사: "
 							+ rs.getString("PUBLISHER") + ", 좋아요 수: " + rs.getInt("LIKE_COUNT") + ", 수량: "
@@ -51,10 +51,10 @@ public class Search {
 				while (num != 3) {
 					switch (num) {
 						case 1:
-							Purchase.purchaseBook(db);
+							Purchase.purchaseBook(db, bookId);
 							return;
 						case 2:
-							FavoriteAdd.addFavoriteBook(db);
+							FavoriteAdd.addFavoriteBook(db, bookId);
 							return;
 						default:
 							System.out.println("잘못된 선택입니다.");

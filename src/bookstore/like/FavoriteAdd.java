@@ -11,9 +11,9 @@ import bookstore.util.DbConnect;
 
 public class FavoriteAdd {
 	/* 전달받은 bookid 가 있는 경우 */
-	public static void addFavoriteBook(Connection conn, Scanner scanner, String bookId) throws SQLException {
+	public static void addFavoriteBook(DbConnect db, String bookId) throws SQLException {
 		String userId = Main.loggedInUserId; // 현재 로그인한 사용자의 ID 가져오기
-		
+		Connection conn = db.getConnection();
 		// 이미 관심 책 목록에 있는지 확인
 		String checkSql = "SELECT COUNT(*) AS count FROM Like_book WHERE id = ? AND book_id = ?";
 		

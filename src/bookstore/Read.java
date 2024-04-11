@@ -389,6 +389,11 @@ public class Read {
 				// 결제 성공 시 구매 내역 추가
 				addPurchase(conn, userId, bookId, "결제완료");
 				System.out.println("결제가 완료되었습니다.");
+				String decreaseAmountSql = "UPDATE Book SET AMOUNT = AMOUNT - 1 WHERE BOOK_ID = ?";
+				try (PreparedStatement updateStmt = conn.prepareStatement(decreaseAmountSql)) {
+					updateStmt.setString(1, bookId);
+					updateStmt.executeUpdate();
+				}
 				return;
 			} else {
 				System.out.println("결제에 실패했습니다.");

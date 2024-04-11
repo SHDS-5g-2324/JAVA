@@ -68,7 +68,7 @@ public class Main {
 		String password = scanner.next();
 
 		String sql = "SELECT COUNT(*) AS count FROM member WHERE id = ? AND pwd = ?";
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+		try {
 			Map<Integer, String> map = new HashMap<>();
 			map.put(1, id);
 			map.put(2, password);
@@ -81,7 +81,7 @@ public class Main {
 					}
 				}
 			}
-		}
+		} finally {}
 		return false;
 	}
 
@@ -162,7 +162,6 @@ public class Main {
 
 			case 3:
 				DeleteId.deleteData(conn, scanner, loggedInUserId);
-				break;
 			case 4:
 				loggedIn = false;
 				System.out.println("로그아웃 되었습니다.");

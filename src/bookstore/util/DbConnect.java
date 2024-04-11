@@ -98,27 +98,26 @@ public class DbConnect {
 
 	/* String 메소드 */
 	public ResultSet getSqlResult(String sql, Map<Integer, String> map) throws SQLException {
-	    Connection conn = null;
-	    PreparedStatement pstmt = null;
-	    ResultSet rs = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
-	    try {
-	        conn = getConnection();
-	        pstmt = conn.prepareStatement(sql);
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
 
-	        for (Integer key : map.keySet()) {
-	            pstmt.setString(key, map.get(key));
-	            System.out.println(key + " : " + map.get(key));
-	        }
+			for (Integer key : map.keySet()) {
+				pstmt.setString(key, map.get(key));
+			}
 
-	        rs = pstmt.executeQuery();
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	        // 예외 발생 시 ResultSet을 반환하지 않고 예외를 다시 던집니다.
-	        throw e;
-	    }
+			rs = pstmt.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			// 예외 발생 시 ResultSet을 반환하지 않고 예외를 다시 던집니다.
+			throw e;
+		}
 
-	    return rs;
+		return rs;
 	}
 
 }

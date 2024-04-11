@@ -1,4 +1,4 @@
-package bookstore.member;
+package src.bookstore.member;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

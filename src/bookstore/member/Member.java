@@ -1,4 +1,4 @@
-package bookstore;
+package src.bookstore.member;
 
 import lombok.Data;
 

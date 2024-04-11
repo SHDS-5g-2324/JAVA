@@ -1,3 +1,4 @@
+package src.bookstore.member;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

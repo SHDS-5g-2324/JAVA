@@ -1,3 +1,5 @@
+package src.bookstore.book;
+
 import lombok.Data;
 
 @Data

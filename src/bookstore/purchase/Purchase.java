@@ -69,6 +69,7 @@ public class Purchase {
 			System.out.println("책 가격: " + bookPrice);
 
 			// 구매 옵션 선택
+			System.out.println("--------------------------");
 			System.out.println("1. 바로 결제하기  2. 장바구니 담기");
 			System.out.print("구매 옵션을 선택하세요: ");
 			String purchaseOption = scanner.next();

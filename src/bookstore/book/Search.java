@@ -17,6 +17,7 @@ public class Search {
 		ResultSet rs = null;
 		Connection conn = db.getConnection();
 		do {
+			System.out.println("--------------------------");
 			System.out.print("검색할 책의 제목을 입력하세요: ");
 			Scanner scanner = new Scanner(System.in);
 			String bookName = scanner.nextLine(); // 사용자로부터 입력 받은 책의 제목을 bookName 변수에 저장
@@ -45,6 +46,7 @@ public class Search {
 				}
 
 				// 책 구매 또는 관심책 추가 메뉴 제공
+				System.out.println("--------------------------");
 				System.out.println("1.책 구매하기 2.관심책 추가하기 3.이전 메뉴로 돌아가기");
 				System.out.print("원하는 작업을 선택하세요: ");
 				int num = scanner.nextInt();
@@ -58,6 +60,7 @@ public class Search {
 							return;
 						default:
 							System.out.println("잘못된 선택입니다.");
+							System.out.println("--------------------------");
 							System.out.println("1.책 구매하기 2.관심책 추가하기 3.이전 메뉴로 돌아가기");
 							num = scanner.nextInt();
 					}
@@ -74,6 +77,7 @@ public class Search {
 			// 사용자가 다시 검색을 할지 물어봄
 			String again;
 			do {
+				System.out.println("--------------------------");
 				System.out.print("책을 검색하시겠습니까? (1.예  2.아니요): ");
 				again = scanner.next();
 				if (!again.equals("1") && !again.equals("2")) {

@@ -378,7 +378,7 @@ public class Read {
 			try (ResultSet rs = balanceStmt.executeQuery()) {
 				if (rs.next()) {
 					currentBalance = rs.getInt("MONEY");
-					System.out.println("### 현재 보유 잔액 : " + currentBalance + "원 입니다.");
+					System.out.println("현재 보유 잔액 : " + currentBalance + "원 입니다.");
 				} else {
 					System.out.println("잔액 조회에 실패했습니다.");
 				}

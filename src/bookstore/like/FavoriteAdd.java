@@ -1,4 +1,4 @@
-package src.bookstore.like;
+package bookstore.like;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,9 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import bookstore.Main;
+
 public class FavoriteAdd {
 	/* 전달받은 bookid 가 있는 경우 */
-	static void addFavoriteBook(Connection conn, Scanner scanner, String bookId) throws SQLException {
+	public static void addFavoriteBook(Connection conn, Scanner scanner, String bookId) throws SQLException {
 		String userId = Main.loggedInUserId; // 현재 로그인한 사용자의 ID 가져오기
 		// 이미 관심 책 목록에 있는지 확인
 		String checkSql = "SELECT COUNT(*) AS count FROM Like_book WHERE id = ? AND book_id = ?";
@@ -47,7 +49,7 @@ public class FavoriteAdd {
 	}
 
 	/*book id 없이 가져온 경우*/
-	static void addFavoriteBook(Connection conn, Scanner scanner) throws SQLException {
+	public static void addFavoriteBook(Connection conn, Scanner scanner) throws SQLException {
 		String userId = Main.loggedInUserId; // 현재 로그인한 사용자의 ID 가져오기
 		System.out.println("관심 등록할 책의 ID를 입력해주세요.");
 		scanner = new Scanner(System.in);

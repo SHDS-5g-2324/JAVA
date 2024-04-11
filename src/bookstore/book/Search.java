@@ -1,12 +1,17 @@
+package bookstore.book;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import bookstore.like.FavoriteAdd;
+import bookstore.purchase.Purchase;
+
 public class Search {
 	/*책 검색*/
-	static void searchBook(Connection conn, Scanner scanner) throws SQLException {
+	public static void searchBook(Connection conn, Scanner scanner) throws SQLException {
 	    PreparedStatement pstmt = null;
 	    ResultSet rs = null;
 	    do {
@@ -41,16 +46,16 @@ public class Search {
 	                switch (num) {
 	                    case 1:
 	                        if (cnt == 1) {
-	                            purchaseBook(conn, scanner, bookId);
+	                            Purchase.purchaseBook(conn, scanner, bookId);
 	                        } else {
-	                            purchaseBook(conn, scanner);
+	                            Purchase.purchaseBook(conn, scanner);
 	                        }
 	                        return;
 	                    case 2:
 	                        if (cnt == 1) {
-	                            Create.addFavoriteBook(conn, scanner, bookId);
+	                            FavoriteAdd.addFavoriteBook(conn, scanner, bookId);
 	                        } else {
-	                            Create.addFavoriteBook(conn, scanner);
+	                            FavoriteAdd.addFavoriteBook(conn, scanner);
 	                        }
 	                        return;
 	                    default:

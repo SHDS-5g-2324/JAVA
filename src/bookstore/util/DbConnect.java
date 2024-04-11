@@ -1,4 +1,4 @@
-package bookstore;
+package bookstore.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import bookstore.member.Member;
 
 public class DbConnect {
     // Oracle 데이터베이스 연결 정보

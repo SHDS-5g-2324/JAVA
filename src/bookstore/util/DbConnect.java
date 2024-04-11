@@ -120,6 +120,27 @@ public class DbConnect {
 
 		return rs;
 	}
+
+	/* 입력 값이 하나인 경우 */
+	public ResultSet getSqlResult(String sql, int idx, String to) throws SQLException {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(idx, to);
+			rs = pstmt.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			// 예외 발생 시 ResultSet을 반환하지 않고 예외를 다시 던집니다.
+			throw e;
+		}
+
+		return rs;
+	}
+
 	/* 그룹함수 등 sql 결과 하나만 리턴 메소드 */
 	public ResultSet getSqlResult(String sql) throws SQLException {
 		Connection conn = null;
@@ -138,6 +159,5 @@ public class DbConnect {
 
 		return rs;
 	}
-
 
 }

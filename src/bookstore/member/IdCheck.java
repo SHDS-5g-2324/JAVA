@@ -5,10 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import bookstore.util.DbConnect;
+
 public class IdCheck {
-	public static void readData(Connection conn, String userId) throws SQLException {
+	public static void readData(DbConnect db, String userId) throws SQLException {
 		String sql = "SELECT * FROM member WHERE id = ?";
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+		try (PreparedStatement pstmt = db.getConnection().prepareStatement(sql)) {
 			pstmt.setString(1, userId);
 
 			try (ResultSet rs = pstmt.executeQuery()) {
@@ -24,9 +26,9 @@ public class IdCheck {
 		}
 	}
 
-	static boolean checkIfIdExists(Connection conn, String id) throws SQLException {
+	static boolean checkIfIdExists(DbConnect db, String id) throws SQLException {
 		String sql = "SELECT COUNT(*) AS count FROM member WHERE id = ?";
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+		try (PreparedStatement pstmt = db.getConnection().prepareStatement(sql)) {
 			pstmt.setString(1, id);
 
 			try (ResultSet rs = pstmt.executeQuery()) {

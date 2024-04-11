@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import bookstore.Main;
+import bookstore.util.DbConnect;
 
 public class FavoriteAdd {
 	/* 전달받은 bookid 가 있는 경우 */
@@ -51,10 +52,11 @@ public class FavoriteAdd {
 	}
 
 	/*book id 없이 가져온 경우*/
-	public static void addFavoriteBook(Connection conn, Scanner scanner) throws SQLException {
+	public static void addFavoriteBook(DbConnect db) throws SQLException {
 		String userId = Main.loggedInUserId; // 현재 로그인한 사용자의 ID 가져오기
 		System.out.println("관심 등록할 책의 ID를 입력해주세요.");
-		scanner = new Scanner(System.in);
+		Scanner scanner = new Scanner(System.in);
+		Connection conn = db.getConnection();
 		String bookId = scanner.nextLine();
 		// book 테이블에 존재하는 book_id인지 확인
 		String checkSql = "SELECT COUNT(*) AS count FROM book WHERE book_id = ?";

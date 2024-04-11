@@ -8,15 +8,17 @@ import java.util.Scanner;
 
 import bookstore.like.FavoriteAdd;
 import bookstore.purchase.Purchase;
+import bookstore.util.DbConnect;
 
 public class Search {
 	/*책 검색*/
-	public static void searchBook(Connection conn, Scanner scanner) throws SQLException {
+	public static void searchBook(DbConnect db) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		Connection conn = db.getConnection();
 		do {
 			System.out.print("검색할 책의 제목을 입력하세요: ");
-
+			Scanner scanner = new Scanner(System.in);
 			String bookName = scanner.nextLine(); // 사용자로부터 입력 받은 책의 제목을 bookName 변수에 저장
 
 			String sql = "SELECT * FROM BOOK WHERE SUBJECT LIKE ?";
@@ -49,10 +51,10 @@ public class Search {
 				while (num != 3) {
 					switch (num) {
 						case 1:
-							Purchase.purchaseBook1(conn, scanner);
+							Purchase.purchaseBook(db);
 							return;
 						case 2:
-							FavoriteAdd.addFavoriteBook(conn, scanner);
+							FavoriteAdd.addFavoriteBook(db);
 							return;
 						default:
 							System.out.println("잘못된 선택입니다.");

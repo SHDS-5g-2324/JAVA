@@ -1,11 +1,7 @@
 package bookstore;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 import bookstore.book.Read;
@@ -13,6 +9,7 @@ import bookstore.book.Search;
 import bookstore.member.DeleteId;
 import bookstore.member.GetBalance;
 import bookstore.member.IdCheck;
+import bookstore.member.Login;
 import bookstore.member.MoneyChange;
 import bookstore.member.PwdChange;
 import bookstore.member.RegisterMember;
@@ -21,16 +18,13 @@ import bookstore.util.DbConnect;
 
 public class Main {
 	static final DbConnect db = new DbConnect();
-	static final String INSERT_MEMBER_QUERY = "INSERT INTO member (member_no, name, id, pwd, ages, sex, email, money) "
-			+ // 수정
-			"VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 	static boolean loggedIn = false;
 	public static String loggedInUserId;
 	static String bookName;
 
 	public static void main(String[] args) {
-		try (Connection conn = db.getConnection(); Scanner scanner = new Scanner(System.in)) {
-
+		try (Connection conn = db.getConnection()) {
+			 Scanner scanner = new Scanner(System.in);
 			while (true) {
 				System.out.println("1.로그인 2.회원가입 3.종료");
 				System.out.print("메뉴를 선택하세요: ");
@@ -38,16 +32,17 @@ public class Main {
 
 				switch (menu) {
 				case "1":
-					if (login(conn, scanner)) {
+					loggedInUserId = Login.login(db);
+					if (!"".equals(loggedInUserId)) {
 						System.out.println("로그인 성공!");
 						loggedIn = true;
-						processMenu(conn, scanner);
+						processMenu(db);
 					} else {
 						System.out.println("아이디 또는 비밀번호가 일치하지 않습니다.");
 					}
 					break;
 				case "2":
-					RegisterMember.createData(conn, scanner);
+					RegisterMember.createData(db);
 					break;
 				case "3":
 					System.out.println("프로그램을 종료합니다.");
@@ -61,31 +56,10 @@ public class Main {
 		}
 	}
 
-	static boolean login(Connection conn, Scanner scanner) throws SQLException {
-		System.out.print("아이디: ");
-		String id = scanner.next();
-		System.out.print("비밀번호: ");
-		String password = scanner.next();
+	
 
-		String sql = "SELECT COUNT(*) AS count FROM member WHERE id = ? AND pwd = ?";
-		try {
-			Map<Integer, String> map = new HashMap<>();
-			map.put(1, id);
-			map.put(2, password);
-			try (ResultSet rs = db.getSqlResult(sql, map);) {
-				if (rs.next()) {
-					int count = rs.getInt("count");
-					if (count == 1) {
-						loggedInUserId = id;
-						return true;
-					}
-				}
-			}
-		} finally {}
-		return false;
-	}
-
-	static void processMenu(Connection conn, Scanner scanner) throws SQLException {
+	static void processMenu(DbConnect db) throws SQLException {
+		Scanner scanner = new Scanner(System.in);
 		while (true) {
 			System.out.println("1.마이페이지 2.책목록 3.회원탈퇴 4.로그아웃");
 			System.out.print("원하는 작업을 선택하세요: ");
@@ -100,22 +74,22 @@ public class Main {
 					String choice = scanner.nextLine();
 					switch (choice) {
 					case "1":
-						IdCheck.readData(conn, loggedInUserId);
+						IdCheck.readData(db, loggedInUserId);
 						break;
 					case "2":
-						PwdChange.updateData(conn, scanner, loggedInUserId);
+						PwdChange.updateData(db, loggedInUserId);
 						break;
 					case "3":
-						GetBalance.readBalance(conn, loggedInUserId);
+						GetBalance.readBalance(db loggedInUserId);
 						break;
 					case "4":
-						MoneyChange.updateMoney(conn, scanner, loggedInUserId);
+						MoneyChange.updateMoney(db, loggedInUserId);
 						break;
 					case "5":
-						Read.executeQuery(conn, loggedInUserId);
+						Read.executeQuery(db loggedInUserId);
 						break;
 					case "6":
-						Read.displayFavoriteBooks(conn, loggedInUserId);
+						Read.displayFavoriteBooks(db loggedInUserId);
 						break;
 					case "7":
 						break;
@@ -135,17 +109,17 @@ public class Main {
 
 					switch (choice) {
 					case "1":
-						Read.bookList(conn);
+						Read.bookList(db);
 						break;
 					case "2":
-						Read.top10List(conn);
+						Read.top10List(db);
 						break;
 					case "3":
-						Read.bookList(conn);
-						Purchase.purchaseBook(conn, scanner);
+						Read.bookList(db);
+						Purchase.purchaseBook(db);
 						break;
 					case "4":
-						Search.searchBook(conn, scanner); // 검색이 되었으면 관심목록 추가 , 구매하기 , 뒤로가기 버튼을 만들고
+						Search.searchBook(db); // 검색이 되었으면 관심목록 추가 , 구매하기 , 뒤로가기 버튼을 만들고
 						// 검색이 안되었으면 게속 검색하기 겠습니까를 추가헤서 뒤로가기랑 냅둔다
 						break;
 					case "5":
@@ -161,7 +135,7 @@ public class Main {
 				break;
 
 			case "3":
-				DeleteId.deleteData(conn, scanner, loggedInUserId);
+				DeleteId.deleteData(db, loggedInUserId);
 			case "4":
 				loggedIn = false;
 				System.out.println("로그아웃 되었습니다.");

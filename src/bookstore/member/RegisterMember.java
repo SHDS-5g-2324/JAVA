@@ -5,13 +5,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
-public class RegisterMember {
-	static final String INSERT_MEMBER_QUERY = "INSERT INTO member (member_no, name, id, pwd, ages, sex, email, money) "
-			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+import bookstore.util.DbConnect;
 
-	public static void createData(Connection conn, Scanner scanner) throws SQLException {
+public class RegisterMember {
+	static DbConnect db;
+
+	public static void createData(DbConnect data) throws SQLException {
+		db = data;
+		Scanner scanner = new Scanner(System.in);
 		System.out.print("이름: ");
 		String name = scanner.next();
 		String id;
@@ -20,7 +25,7 @@ public class RegisterMember {
 		do {
 			System.out.print("아이디: ");
 			id = scanner.next();
-			idExists = checkIfIdExists(conn, id); // Create 클래스 내에 메소드이므로 클래스명 없이 직접 호출
+			idExists = checkIfIdExists(db, id); // Create 클래스 내에 메소드이므로 클래스명 없이 직접 호출
 			if (idExists) {
 				System.out.println("이미 존재하는 아이디입니다. 다른 아이디를 입력하세요.");
 			}
@@ -44,9 +49,11 @@ public class RegisterMember {
 		System.out.print("이메일: ");
 		String email = scanner.next();
 		int money = 0;
-
-		try (PreparedStatement pstmt = conn.prepareStatement(INSERT_MEMBER_QUERY)) {
-			int lastMemberNo = getLastMemberNo(conn); // Create 클래스 내에 메소드이므로 클래스명 없이 직접 호출
+		
+		String sql = "INSERT INTO member (member_no, name, id, pwd, ages, sex, email, money) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		try (PreparedStatement pstmt = db.getConnection().prepareStatement(sql)) {
+			int lastMemberNo = getLastMemberNo(db); // Create 클래스 내에 메소드이므로 클래스명 없이 직접 호출
 			int num = lastMemberNo + 1;
 
 			pstmt.setInt(1, num);
@@ -66,24 +73,22 @@ public class RegisterMember {
 		}
 	}
 
-	static boolean checkIfIdExists(Connection conn, String id) throws SQLException {
+	static boolean checkIfIdExists(DbConnect db, String id) throws SQLException {
 		String sql = "SELECT COUNT(*) AS count FROM member WHERE id = ?";
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, id);
-
-			try (ResultSet rs = pstmt.executeQuery()) {
-				if (rs.next()) {
-					int count = rs.getInt("count");
-					return count > 0;
-				}
+		Map<Integer, String> map = new HashMap<>();
+		map.put(1, id);
+		try (ResultSet rs = db.getSqlResult(sql, map)) {
+			if (rs.next()) {
+				int count = rs.getInt("count");
+				return count > 0;
 			}
 		}
 		return false;
 	}
 
-	static int getLastMemberNo(Connection conn) throws SQLException {
+	static int getLastMemberNo(DbConnect db) throws SQLException {
 		String sql = "SELECT MAX(member_no) AS lastMemberNo FROM member"; // 수정
-		try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+		try (ResultSet rs = db.getSqlResult(sql)) {
 			if (rs.next()) {
 				return rs.getInt("lastMemberNo");
 			}

@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -96,7 +97,7 @@ public class DbConnect {
 		}
 	}
 
-	/* String 메소드 */
+	/* SELECT String 메소드 */
 	public ResultSet getSqlResult(String sql, Map<Integer, String> map) throws SQLException {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -119,5 +120,24 @@ public class DbConnect {
 
 		return rs;
 	}
+	/* 그룹함수 등 sql 결과 하나만 리턴 메소드 */
+	public ResultSet getSqlResult(String sql) throws SQLException {
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			// 예외 발생 시 ResultSet을 반환하지 않고 예외를 다시 던집니다.
+			throw e;
+		}
+
+		return rs;
+	}
+
 
 }

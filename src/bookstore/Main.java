@@ -63,13 +63,14 @@ public class Main {
 		while (true) {
 			System.out.println("1.마이페이지 2.책목록 3.회원탈퇴 4.로그아웃");
 			System.out.print("원하는 작업을 선택하세요: ");
-			String select = scanner.nextLine();
+			String select = scanner.next(); // 개행 문자까지만 읽음
+			scanner.nextLine(); // 개행 문자 소비
 
 			switch (select) {
-			case "1":
-				while (true) {
-					System.out.println("1.개인정보확인 2.비밀번호변경 3.잔액조회 4.잔액충전 5.구매내역조회 6.관심목록조회 7.뒤로가기");
-					System.out.print("원하는 작업을 선택하세요: ");
+				case "1":
+					while (true) {
+						System.out.println("1.개인정보확인 2.비밀번호변경 3.잔액조회 4.잔액충전 5.구매내역조회 6.관심목록조회 7.장바구니목록 8.뒤로가기");
+						System.out.print("원하는 작업을 선택하세요: ");
 
 <<<<<<< HEAD
 					String choice = scanner.nextLine();
@@ -97,12 +98,39 @@ public class Main {
 					default:
 						System.out.println("올바른 메뉴를 선택하세요.");
 =======
+						String choice = scanner.nextLine();
+						switch (choice) {
+							case "1":
+								IdCheck.readData(conn, loggedInUserId);
+								break;
+							case "2":
+								PwdChange.updateData(conn, scanner, loggedInUserId);
+								break;
+							case "3":
+								GetBalance.readBalance(conn, loggedInUserId);
+								break;
+							case "4":
+								MoneyChange.updateMoney(conn, scanner, loggedInUserId);
+								break;
+							case "5":
+								Read.executeQuery(conn, loggedInUserId);
+								break;
+							case "6":
+								Read.displayFavoriteBooks(conn, loggedInUserId);
+								break;
+							case "7":
+								Read.cartDisplay(conn, loggedInUserId);
+								break;
+							case "8":
+								break;
+							default:
+								System.out.println("올바른 메뉴를 선택하세요.");
+						}
+						if ("8".equals(choice))
+							break;
 >>>>>>> d673baf704875f0126bbbb4c3d7b6eb2fd9ec336
 					}
-					if ("7".equals(choice))
-						break;
-				}
-				break;
+					break;
 			case "2":
 				while (true) {
 					System.out.println("1.책목록 2.TOP10도서 3.책구매하기 4.책검색 5.뒤로가기");

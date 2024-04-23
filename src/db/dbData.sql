@@ -61,126 +61,126 @@ ALTER TABLE "purchase" DROP CONSTRAINT "PK_PURCHASE";
 ALTER TABLE "like_book" DROP CONSTRAINT "FK_member_TO_like_book_1";
 ALTER TABLE "purchase" DROP CONSTRAINT "FK_member_TO_purchase_1";
 
--- member Å×ÀÌºí¿¡ ´õ¹Ì µ¥ÀÌÅÍ »ğÀÔ
+-- member í…Œì´ë¸”ì— ë”ë¯¸ ë°ì´í„° ì‚½ì…
 INSERT INTO "member" ("id", "name", "pwd", "ages", "sex", "email", "money", "member_no")
-VALUES ('john_doe001', 'È«±æµ¿', 'P@ssw0rd1', '30', '³²', 'john@example.com', 65000, 1);
+VALUES ('john_doe001', 'í™ê¸¸ë™', 'P@ssw0rd1', '30', 'ë‚¨', 'john@example.com', 65000, 1);
 
 INSERT INTO "member" ("id", "name", "pwd", "ages", "sex", "email", "money", "member_no")
-VALUES ('emma_smith002', 'ÀÌ¿µÈñ', 'Pwd12345', '25', '¿©', 'emma@example.com', 75000, 2);
+VALUES ('emma_smith002', 'ì´ì˜í¬', 'Pwd12345', '25', 'ì—¬', 'emma@example.com', 75000, 2);
 
 INSERT INTO "member" ("id", "name", "pwd", "ages", "sex", "email", "money", "member_no")
-VALUES ('william_johnson003', '¹Ú¹Î¼ö', 'Secret@789', '35', '³²', 'william@example.com', 55000, 3);
+VALUES ('william_johnson003', 'ë°•ë¯¼ìˆ˜', 'Secret@789', '35', 'ë‚¨', 'william@example.com', 55000, 3);
 
 INSERT INTO "member" ("id", "name", "pwd", "ages", "sex", "email", "money", "member_no")
-VALUES ('sophia_brown004', 'Á¤Áö¿µ', 'SecurePwd12', '28', '¿©', 'sophia@example.com', 85000, 4);
--- member Å×ÀÌºí¿¡ ´õ¹Ì µ¥ÀÌÅÍ »ğÀÔ
+VALUES ('sophia_brown004', 'ì •ì§€ì˜', 'SecurePwd12', '28', 'ì—¬', 'sophia@example.com', 85000, 4);
+-- member í…Œì´ë¸”ì— ë”ë¯¸ ë°ì´í„° ì‚½ì…
 INSERT INTO "member" ("id", "name", "pwd", "ages", "sex", "email", "money", "member_no")
-VALUES ('james_miller005', '±è¹Î¼ö', 'Passw0rd', '40', '³²', 'james@example.com', 70000, 5);
+VALUES ('james_miller005', 'ê¹€ë¯¼ìˆ˜', 'Passw0rd', '40', 'ë‚¨', 'james@example.com', 70000, 5);
 
 INSERT INTO "member" ("id", "name", "pwd", "ages", "sex", "email", "money", "member_no")
-VALUES ('olivia_taylor006', 'ÀÌÁö¿¬', 'Pwd5678', '22', '¿©', 'olivia@example.com', 60000, 6);
+VALUES ('olivia_taylor006', 'ì´ì§€ì—°', 'Pwd5678', '22', 'ì—¬', 'olivia@example.com', 60000, 6);
 
 INSERT INTO "member" ("id", "name", "pwd", "ages", "sex", "email", "money", "member_no")
-VALUES ('liam_wilson007', '±èÇö¼ö', 'Secret123', '33', '³²', 'liam@example.com', 80000, 7);
+VALUES ('liam_wilson007', 'ê¹€í˜„ìˆ˜', 'Secret123', '33', 'ë‚¨', 'liam@example.com', 80000, 7);
 
 INSERT INTO "member" ("id", "name", "pwd", "ages", "sex", "email", "money", "member_no")
-VALUES ('ava_moore008', 'Á¤¹Ì¼÷', 'SecurePwd56', '29', '¿©', 'ava@example.com', 70000, 8);
+VALUES ('ava_moore008', 'ì •ë¯¸ìˆ™', 'SecurePwd56', '29', 'ì—¬', 'ava@example.com', 70000, 8);
 
 INSERT INTO "member" ("id", "name", "pwd", "ages", "sex", "email", "money", "member_no")
-VALUES ('mason_king009', '¹Ú½ÂÈñ', 'P@ssw0rd789', '38', '³²', 'mason@example.com', 60000, 9);
+VALUES ('mason_king009', 'ë°•ìŠ¹í¬', 'P@ssw0rd789', '38', 'ë‚¨', 'mason@example.com', 60000, 9);
 
 INSERT INTO "member" ("id", "name", "pwd", "ages", "sex", "email", "money", "member_no")
-VALUES ('mia_turner010', '±è¼­¿¬', 'Pwd98765', '26', '¿©', 'mia@example.com', 90000, 10);
+VALUES ('mia_turner010', 'ê¹€ì„œì—°', 'Pwd98765', '26', 'ì—¬', 'mia@example.com', 90000, 10);
 
 INSERT INTO "member" ("id", "name", "pwd", "ages", "sex", "email", "money", "member_no")
-VALUES ('ethan_adams011', 'ÀÌ¹ÎÈ£', 'SecretPwd78', '32', '³²', 'ethan@example.com', 55000, 11);
+VALUES ('ethan_adams011', 'ì´ë¯¼í˜¸', 'SecretPwd78', '32', 'ë‚¨', 'ethan@example.com', 55000, 11);
 
 INSERT INTO "member" ("id", "name", "pwd", "ages", "sex", "email", "money", "member_no")
-VALUES ('isabella_stewart012', '±èÁöÇö', 'Secure123Pwd', '27', '¿©', 'isabella@example.com', 65000, 12);
+VALUES ('isabella_stewart012', 'ê¹€ì§€í˜„', 'Secure123Pwd', '27', 'ì—¬', 'isabella@example.com', 65000, 12);
 
 INSERT INTO "member" ("id", "name", "pwd", "ages", "sex", "email", "money", "member_no")
-VALUES ('noah_robinson013', 'ÀÌ½ÂÈ£', 'P@ss123word', '36', '³²', 'noah@example.com', 75000, 13);
+VALUES ('noah_robinson013', 'ì´ìŠ¹í˜¸', 'P@ss123word', '36', 'ë‚¨', 'noah@example.com', 75000, 13);
 
 INSERT INTO "member" ("id", "name", "pwd", "ages", "sex", "email", "money", "member_no")
-VALUES ('sophia_thompson014', '±è¼öÁø', '123SecurePwd', '23', '¿©', 'sophiath@example.com', 85000, 14);
+VALUES ('sophia_thompson014', 'ê¹€ìˆ˜ì§„', '123SecurePwd', '23', 'ì—¬', 'sophiath@example.com', 85000, 14);
 
 INSERT INTO "member" ("id", "name", "pwd", "ages", "sex", "email", "money", "member_no")
-VALUES ('liam_scott015', '¹Ú¿µ¼ö', 'Pwd@secure12', '41', '³²', 'liams@example.com', 60000, 15);
+VALUES ('liam_scott015', 'ë°•ì˜ìˆ˜', 'Pwd@secure12', '41', 'ë‚¨', 'liams@example.com', 60000, 15);
 
 INSERT INTO "member" ("id", "name", "pwd", "ages", "sex", "email", "money", "member_no")
-VALUES ('olivia_wright016', 'ÀÌ¼öÁ¤', 'SecureP@ss', '28', '¿©', 'olivia@example.com', 90000, 16);
+VALUES ('olivia_wright016', 'ì´ìˆ˜ì •', 'SecureP@ss', '28', 'ì—¬', 'olivia@example.com', 90000, 16);
 
 INSERT INTO "member" ("id", "name", "pwd", "ages", "sex", "email", "money", "member_no")
-VALUES ('william_jackson017', 'ÃÖ¿µÈñ', 'P@ss12345', '35', '³²', 'william@example.com', 75000, 17);
+VALUES ('william_jackson017', 'ìµœì˜í¬', 'P@ss12345', '35', 'ë‚¨', 'william@example.com', 75000, 17);
 
 INSERT INTO "member" ("id", "name", "pwd", "ages", "sex", "email", "money", "member_no")
-VALUES ('emma_rodriguez018', '±èÀº°æ', 'Secure12@Pwd', '25', '¿©', 'emma@example.com', 55000, 18);
+VALUES ('emma_rodriguez018', 'ê¹€ì€ê²½', 'Secure12@Pwd', '25', 'ì—¬', 'emma@example.com', 55000, 18);
 
 INSERT INTO "member" ("id", "name", "pwd", "ages", "sex", "email", "money", "member_no")
-VALUES ('james_lee019', '½Åµ¿Çö', '123Pwd@secure', '40', '³²', 'james@example.com', 85000, 19);
+VALUES ('james_lee019', 'ì‹ ë™í˜„', '123Pwd@secure', '40', 'ë‚¨', 'james@example.com', 85000, 19);
 
 INSERT INTO "member" ("id", "name", "pwd", "ages", "sex", "email", "money", "member_no")
-VALUES ('ava_gonzalez020', '±è¼öºó', 'P@ssword12', '29', '¿©', 'ava@example.com', 65000, 20);
+VALUES ('ava_gonzalez020', 'ê¹€ìˆ˜ë¹ˆ', 'P@ssword12', '29', 'ì—¬', 'ava@example.com', 65000, 20);
 
 ALTER TABLE "book" MODIFY ("author" VARCHAR2(30 BYTE));
 
--- book Å×ÀÌºí¿¡ ´õ¹Ì µ¥ÀÌÅÍ »ğÀÔ (1ºÎÅÍ 20±îÁö)
+-- book í…Œì´ë¸”ì— ë”ë¯¸ ë°ì´í„° ì‚½ì… (1ë¶€í„° 20ê¹Œì§€)
 INSERT INTO "book" ("book_id", "subject", "price", "link", "author", "publisher", "like_count", "sell_count", "amount")
-VALUES ('bk001', '¹Ì¿ò¹ŞÀ» ¿ë±â', 18000, 'https://www.books.com/bk001', '±â½Ã¹Ì ÀÌÄ¡·Î', 'ÃâÆÇ»çA', 300, 500, 100);
-
-INSERT INTO "book" ("book_id", "subject", "price", "link", "author", "publisher", "like_count", "sell_count", "amount")
-VALUES ('bk002', 'ÇØ¸®Æ÷ÅÍ¿Í ¸¶¹ı»çÀÇ µ¹', 25000, 'https://www.books.com/bk002', 'J.K. ·Ñ¸µ', 'ÃâÆÇ»çB', 700, 800, 150);
+VALUES ('bk001', 'ë¯¸ì›€ë°›ì„ ìš©ê¸°', 18000, 'https://www.books.com/bk001', 'ê¸°ì‹œë¯¸ ì´ì¹˜ë¡œ', 'ì¶œíŒì‚¬A', 300, 500, 100);
 
 INSERT INTO "book" ("book_id", "subject", "price", "link", "author", "publisher", "like_count", "sell_count", "amount")
-VALUES ('bk003', '³ëÀÎ°ú ¹Ù´Ù', 21000, 'https://www.books.com/bk003', '¾î´Ï½ºÆ® Çì¹Ö¿şÀÌ', 'ÃâÆÇ»çC', 450, 600, 120);
+VALUES ('bk002', 'í•´ë¦¬í¬í„°ì™€ ë§ˆë²•ì‚¬ì˜ ëŒ', 25000, 'https://www.books.com/bk002', 'J.K. ë¡¤ë§', 'ì¶œíŒì‚¬B', 700, 800, 150);
 
 INSERT INTO "book" ("book_id", "subject", "price", "link", "author", "publisher", "like_count", "sell_count", "amount")
-VALUES ('bk004', '1984', 22000, 'https://www.books.com/bk004', 'Á¶Áö ¿ÀÀ£', 'ÃâÆÇ»çD', 400, 550, 130);
+VALUES ('bk003', 'ë…¸ì¸ê³¼ ë°”ë‹¤', 21000, 'https://www.books.com/bk003', 'ì–´ë‹ˆìŠ¤íŠ¸ í—¤ë°ì›¨ì´', 'ì¶œíŒì‚¬C', 450, 600, 120);
 
 INSERT INTO "book" ("book_id", "subject", "price", "link", "author", "publisher", "like_count", "sell_count", "amount")
-VALUES ('bk005', '¾Ë°í¸®Áò', 30000, 'https://www.books.com/bk005', 'Å¬¶óÀÌ¸¸', 'ÃâÆÇ»çE', 800, 900, 200);
+VALUES ('bk004', '1984', 22000, 'https://www.books.com/bk004', 'ì¡°ì§€ ì˜¤ì›°', 'ì¶œíŒì‚¬D', 400, 550, 130);
 
 INSERT INTO "book" ("book_id", "subject", "price", "link", "author", "publisher", "like_count", "sell_count", "amount")
-VALUES ('bk006', '¾î¸° ¿ÕÀÚ', 15000, 'https://www.books.com/bk006', '»ıÅØÁãÆä¸®', 'ÃâÆÇ»çF', 350, 400, 90);
+VALUES ('bk005', 'ì•Œê³ ë¦¬ì¦˜', 30000, 'https://www.books.com/bk005', 'í´ë¼ì´ë§Œ', 'ì¶œíŒì‚¬E', 800, 900, 200);
+
+INSERT INTO "book" ("book_id", "subject", "price", "link", "author", "publisher", "like_count", "sell_count", "amount")
+VALUES ('bk006', 'ì–´ë¦° ì™•ì', 15000, 'https://www.books.com/bk006', 'ìƒí…ì¥í˜ë¦¬', 'ì¶œíŒì‚¬F', 350, 400, 90);
 
 
 
 INSERT INTO "book" ("book_id", "subject", "price", "link", "author", "publisher", "like_count", "sell_count", "amount")
-VALUES ('bk009', 'ÁÁÀº ÀÎ»ıÀ» ¸¸µå´Â ¹æ¹ı', 28000, 'https://www.books.com/bk009', '·Î¹öÆ® ¿ï¸®', 'ÃâÆÇ»çI', 900, 950, 180);
+VALUES ('bk009', 'ì¢‹ì€ ì¸ìƒì„ ë§Œë“œëŠ” ë°©ë²•', 28000, 'https://www.books.com/bk009', 'ë¡œë²„íŠ¸ ìš¸ë¦¬', 'ì¶œíŒì‚¬I', 900, 950, 180);
 
--- book Å×ÀÌºí¿¡ ´õ¹Ì µ¥ÀÌÅÍ »ğÀÔ (21ºÎÅÍ 30±îÁö)
+-- book í…Œì´ë¸”ì— ë”ë¯¸ ë°ì´í„° ì‚½ì… (21ë¶€í„° 30ê¹Œì§€)
 INSERT INTO "book" ("book_id", "subject", "price", "link", "author", "publisher", "like_count", "sell_count", "amount")
-VALUES ('bk011', 'Á×¿© ¸¶¶¥ÇÑ°¡', 27000, 'https://www.books.com/bk011', 'ÇÏÅÂÈ£', 'ÃâÆÇ»çK', 850, 800, 160);
-
-INSERT INTO "book" ("book_id", "subject", "price", "link", "author", "publisher", "like_count", "sell_count", "amount")
-VALUES ('bk012', '¿Ïº®ÇÑ ÀÇ¹«', 19000, 'https://www.books.com/bk012', '¿ÀÄ«´Ù È÷·Î³ëºÎ', 'ÃâÆÇ»çL', 600, 700, 130);
+VALUES ('bk011', 'ì£½ì—¬ ë§ˆë•…í•œê°€', 27000, 'https://www.books.com/bk011', 'í•˜íƒœí˜¸', 'ì¶œíŒì‚¬K', 850, 800, 160);
 
 INSERT INTO "book" ("book_id", "subject", "price", "link", "author", "publisher", "like_count", "sell_count", "amount")
-VALUES ('bk013', 'Çàº¹ÇØÁö°í ½ÍÀº ±âºĞÀÌ µå´Â Ã¥', 25000, 'https://www.books.com/bk013', 'ÀÌÁö¼±', 'ÃâÆÇ»çM', 750, 850, 170);
+VALUES ('bk012', 'ì™„ë²½í•œ ì˜ë¬´', 19000, 'https://www.books.com/bk012', 'ì˜¤ì¹´ë‹¤ íˆë¡œë…¸ë¶€', 'ì¶œíŒì‚¬L', 600, 700, 130);
 
 INSERT INTO "book" ("book_id", "subject", "price", "link", "author", "publisher", "like_count", "sell_count", "amount")
-VALUES ('bk014', '½ÇÁ¾µÈ »ê¹®', 31000, 'https://www.books.com/bk014', 'ÃÖÁ¤¿í', 'ÃâÆÇ»çN', 920, 1000, 190);
+VALUES ('bk013', 'í–‰ë³µí•´ì§€ê³  ì‹¶ì€ ê¸°ë¶„ì´ ë“œëŠ” ì±…', 25000, 'https://www.books.com/bk013', 'ì´ì§€ì„ ', 'ì¶œíŒì‚¬M', 750, 850, 170);
 
 INSERT INTO "book" ("book_id", "subject", "price", "link", "author", "publisher", "like_count", "sell_count", "amount")
-VALUES ('bk015', '¾Æ¹«°Íµµ ¾Æ´Ï¾ú´ø ¸ğµç °Í', 20000, 'https://www.books.com/bk015', '¹Ú¼ÛÀÌ', 'ÃâÆÇ»çO', 550, 650, 120);
+VALUES ('bk014', 'ì‹¤ì¢…ëœ ì‚°ë¬¸', 31000, 'https://www.books.com/bk014', 'ìµœì •ìš±', 'ì¶œíŒì‚¬N', 920, 1000, 190);
 
 INSERT INTO "book" ("book_id", "subject", "price", "link", "author", "publisher", "like_count", "sell_count", "amount")
-VALUES ('bk016', 'ÀÛÀº ¼¶°ú ¹Ù´ÙÀÇ Çª¸¥ ¿©Çà', 28000, 'https://www.books.com/bk016', '±èÀº¼÷', 'ÃâÆÇ»çP', 800, 900, 180);
+VALUES ('bk015', 'ì•„ë¬´ê²ƒë„ ì•„ë‹ˆì—ˆë˜ ëª¨ë“  ê²ƒ', 20000, 'https://www.books.com/bk015', 'ë°•ì†¡ì´', 'ì¶œíŒì‚¬O', 550, 650, 120);
 
 INSERT INTO "book" ("book_id", "subject", "price", "link", "author", "publisher", "like_count", "sell_count", "amount")
-VALUES ('bk017', '¿­½ÉÈ÷ »ì°í ½ÍÁö¸¸ ¸öÀÌ ¸ÕÀú ºÒÅ¸´Â ¹ı', 24000, 'https://www.books.com/bk017', '¿ÀÀº¿µ', 'ÃâÆÇ»çQ', 700, 800, 150);
+VALUES ('bk016', 'ì‘ì€ ì„¬ê³¼ ë°”ë‹¤ì˜ í‘¸ë¥¸ ì—¬í–‰', 28000, 'https://www.books.com/bk016', 'ê¹€ì€ìˆ™', 'ì¶œíŒì‚¬P', 800, 900, 180);
 
 INSERT INTO "book" ("book_id", "subject", "price", "link", "author", "publisher", "like_count", "sell_count", "amount")
-VALUES ('bk018', '¹Ì¾ÈÇÏ´Ù, ³»°¡ ³Î »ç¶ûÇÏÁö ¾Ê¾Æ', 33000, 'https://www.books.com/bk018', 'ÀÌ¹Ì¿¹', 'ÃâÆÇ»çR', 1000, 1100, 220);
+VALUES ('bk017', 'ì—´ì‹¬íˆ ì‚´ê³  ì‹¶ì§€ë§Œ ëª¸ì´ ë¨¼ì € ë¶ˆíƒ€ëŠ” ë²•', 24000, 'https://www.books.com/bk017', 'ì˜¤ì€ì˜', 'ì¶œíŒì‚¬Q', 700, 800, 150);
 
 INSERT INTO "book" ("book_id", "subject", "price", "link", "author", "publisher", "like_count", "sell_count", "amount")
-VALUES ('bk019', '¸ğµç ¼¼°èÀÇ ³¡¿¡¼­ ³Ê¸¦ ¸¸³ª', 22000, 'https://www.books.com/bk019', '¹é³­µµ', 'ÃâÆÇ»çS', 600, 750, 140);
+VALUES ('bk018', 'ë¯¸ì•ˆí•˜ë‹¤, ë‚´ê°€ ë„ ì‚¬ë‘í•˜ì§€ ì•Šì•„', 33000, 'https://www.books.com/bk018', 'ì´ë¯¸ì˜ˆ', 'ì¶œíŒì‚¬R', 1000, 1100, 220);
 
 INSERT INTO "book" ("book_id", "subject", "price", "link", "author", "publisher", "like_count", "sell_count", "amount")
-VALUES ('bk020', '°í·¡ÀÌ¸§ÀÇ Áß°£¾ç¸»', 26000, 'https://www.books.com/bk020', 'Åä¹Ì', 'ÃâÆÇ»çT', 750, 850, 170);
+VALUES ('bk019', 'ëª¨ë“  ì„¸ê³„ì˜ ëì—ì„œ ë„ˆë¥¼ ë§Œë‚˜', 22000, 'https://www.books.com/bk019', 'ë°±ë‚œë„', 'ì¶œíŒì‚¬S', 600, 750, 140);
+
+INSERT INTO "book" ("book_id", "subject", "price", "link", "author", "publisher", "like_count", "sell_count", "amount")
+VALUES ('bk020', 'ê³ ë˜ì´ë¦„ì˜ ì¤‘ê°„ì–‘ë§', 26000, 'https://www.books.com/bk020', 'í† ë¯¸', 'ì¶œíŒì‚¬T', 750, 850, 170);
 
 
--- like_book Å×ÀÌºí¿¡ ´õ¹Ì µ¥ÀÌÅÍ »ğÀÔ
+-- like_book í…Œì´ë¸”ì— ë”ë¯¸ ë°ì´í„° ì‚½ì…
 INSERT INTO "like_book" ("book_id", "id")
 VALUES ('bk001', 'mia_turner010');
 
@@ -210,7 +210,7 @@ VALUES ('bk006', 'james_smith015');
 
 INSERT INTO "like_book" ("book_id", "id")
 VALUES ('bk007', 'olivia_johnson016');
--- Ãß°¡·Î 10°³ÀÇ ´õ¹Ì µ¥ÀÌÅÍ »ğÀÔ
+-- ì¶”ê°€ë¡œ 10ê°œì˜ ë”ë¯¸ ë°ì´í„° ì‚½ì…
 INSERT INTO "like_book" ("book_id", "id")
 VALUES ('bk008', 'emma_anderson017');
 
@@ -242,64 +242,64 @@ INSERT INTO "like_book" ("book_id", "id")
 VALUES ('bk017', 'william_martin020');
 ALTER TABLE "purchase" MODIFY "state" VARCHAR2(12);
 
--- purchase Å×ÀÌºí¿¡ ´õ¹Ì µ¥ÀÌÅÍ »ğÀÔ
+-- purchase í…Œì´ë¸”ì— ë”ë¯¸ ë°ì´í„° ì‚½ì…
 INSERT INTO "purchase" ("purchase_no", "book_id", "id", "state")
-VALUES (1, 'bk001', 'mia_turner010', '°áÁ¦¿Ï·á');
+VALUES (1, 'bk001', 'mia_turner010', 'ê²°ì œì™„ë£Œ');
 
 INSERT INTO "purchase" ("purchase_no", "book_id", "id", "state")
-VALUES (2, 'bk004', 'ethan_adams011', '°áÁ¦¿Ï·á');
+VALUES (2, 'bk004', 'ethan_adams011', 'ê²°ì œì™„ë£Œ');
 
 INSERT INTO "purchase" ("purchase_no", "book_id", "id", "state")
-VALUES (3, 'bk002', 'isabella_stewart012', '°áÁ¦´ë±â');
+VALUES (3, 'bk002', 'isabella_stewart012', 'ê²°ì œëŒ€ê¸°');
 
 INSERT INTO "purchase" ("purchase_no", "book_id", "id", "state")
-VALUES (4, 'bk003', 'noah_robinson013', '°áÁ¦´ë±â');
+VALUES (4, 'bk003', 'noah_robinson013', 'ê²°ì œëŒ€ê¸°');
 
 INSERT INTO "purchase" ("purchase_no", "book_id", "id", "state")
-VALUES (5, 'bk005', 'sophia_thompson014', '°áÁ¦¿Ï·á');
+VALUES (5, 'bk005', 'sophia_thompson014', 'ê²°ì œì™„ë£Œ');
 
 INSERT INTO "purchase" ("purchase_no", "book_id", "id", "state")
-VALUES (6, 'bk006', 'james_smith015', '°áÁ¦¿Ï·á');
+VALUES (6, 'bk006', 'james_smith015', 'ê²°ì œì™„ë£Œ');
 
 INSERT INTO "purchase" ("purchase_no", "book_id", "id", "state")
-VALUES (7, 'bk007', 'olivia_johnson016', '°áÁ¦´ë±â');
+VALUES (7, 'bk007', 'olivia_johnson016', 'ê²°ì œëŒ€ê¸°');
 
 INSERT INTO "purchase" ("purchase_no", "book_id", "id", "state")
-VALUES (8, 'bk008', 'emma_anderson017', '°áÁ¦¿Ï·á');
+VALUES (8, 'bk008', 'emma_anderson017', 'ê²°ì œì™„ë£Œ');
 
 INSERT INTO "purchase" ("purchase_no", "book_id", "id", "state")
-VALUES (9, 'bk009', 'liam_taylor018', '°áÁ¦¿Ï·á');
+VALUES (9, 'bk009', 'liam_taylor018', 'ê²°ì œì™„ë£Œ');
 
 INSERT INTO "purchase" ("purchase_no", "book_id", "id", "state")
-VALUES (10, 'bk010', 'ava_wilson019', '°áÁ¦¿Ï·á');
+VALUES (10, 'bk010', 'ava_wilson019', 'ê²°ì œì™„ë£Œ');
 
--- purchase Å×ÀÌºí¿¡ Ãß°¡·Î 10°³ÀÇ ´õ¹Ì µ¥ÀÌÅÍ »ğÀÔ
+-- purchase í…Œì´ë¸”ì— ì¶”ê°€ë¡œ 10ê°œì˜ ë”ë¯¸ ë°ì´í„° ì‚½ì…
 INSERT INTO "purchase" ("purchase_no", "book_id", "id", "state")
-VALUES (11, 'bk011', 'william_martin020', '°áÁ¦¿Ï·á');
-
-INSERT INTO "purchase" ("purchase_no", "book_id", "id", "state")
-VALUES (12, 'bk012', 'sophia_thompson014', '°áÁ¦´ë±â');
+VALUES (11, 'bk011', 'william_martin020', 'ê²°ì œì™„ë£Œ');
 
 INSERT INTO "purchase" ("purchase_no", "book_id", "id", "state")
-VALUES (13, 'bk013', 'jackson_anderson021', '°áÁ¦¿Ï·á');
+VALUES (12, 'bk012', 'sophia_thompson014', 'ê²°ì œëŒ€ê¸°');
 
 INSERT INTO "purchase" ("purchase_no", "book_id", "id", "state")
-VALUES (14, 'bk014', 'olivia_johnson016', '°áÁ¦´ë±â');
+VALUES (13, 'bk013', 'jackson_anderson021', 'ê²°ì œì™„ë£Œ');
 
 INSERT INTO "purchase" ("purchase_no", "book_id", "id", "state")
-VALUES (15, 'bk015', 'oliver_miller022', '°áÁ¦¿Ï·á');
+VALUES (14, 'bk014', 'olivia_johnson016', 'ê²°ì œëŒ€ê¸°');
 
 INSERT INTO "purchase" ("purchase_no", "book_id", "id", "state")
-VALUES (16, 'bk016', 'emma_anderson017', '°áÁ¦¿Ï·á');
+VALUES (15, 'bk015', 'oliver_miller022', 'ê²°ì œì™„ë£Œ');
 
 INSERT INTO "purchase" ("purchase_no", "book_id", "id", "state")
-VALUES (17, 'bk017', 'william_martin020', '°áÁ¦¿Ï·á');
+VALUES (16, 'bk016', 'emma_anderson017', 'ê²°ì œì™„ë£Œ');
 
 INSERT INTO "purchase" ("purchase_no", "book_id", "id", "state")
-VALUES (18, 'bk018', 'jackson_anderson021', '°áÁ¦´ë±â');
+VALUES (17, 'bk017', 'william_martin020', 'ê²°ì œì™„ë£Œ');
 
 INSERT INTO "purchase" ("purchase_no", "book_id", "id", "state")
-VALUES (19, 'bk019', 'oliver_miller022', '°áÁ¦¿Ï·á');
+VALUES (18, 'bk018', 'jackson_anderson021', 'ê²°ì œëŒ€ê¸°');
 
 INSERT INTO "purchase" ("purchase_no", "book_id", "id", "state")
-VALUES (20, 'bk020', 'sophia_thompson014', '°áÁ¦´ë±â');
+VALUES (19, 'bk019', 'oliver_miller022', 'ê²°ì œì™„ë£Œ');
+
+INSERT INTO "purchase" ("purchase_no", "book_id", "id", "state")
+VALUES (20, 'bk020', 'sophia_thompson014', 'ê²°ì œëŒ€ê¸°');
